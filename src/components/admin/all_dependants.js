@@ -6,7 +6,8 @@ import ReactTable from './component/table_card'
 import * as FaIcons from 'react-icons/fa';
 import * as MdIcons from 'react-icons/md'
 
-export default function AllRequests() {
+
+export default function MyDependants() {
 
     const columns = [
         {
@@ -30,8 +31,12 @@ export default function AllRequests() {
           accessor: 'phone',
         },
         {
-          Header: 'Address',
-          accessor: 'address',
+          Header: 'Card',
+          accessor: 'card_type',
+        },
+        {
+          Header: 'Relation',
+          accessor: 'relation',
         },
         {
           Header: 'City',
@@ -60,41 +65,42 @@ export default function AllRequests() {
       const data = [
         {
           firstname: 'John',
-          lastname: 'Doe',
+          lastname : 'Doe',
           age: 30,
           email: 'john.doe@example.com',
           phone: '555-555-5555',
-          address: '123 Main St',
+          card_type: 'Children Card',
           city: 'Anytown',
+          relation: 'children',
           country: 'USA',
         },
         {
-          firstname: 'Melckzedeck',
-          lastname : 'James',
+          firstname: 'Cotton',
+          lastname : 'Zedeck',
           age: 30,
           email: 'john.doe@example.com',
           phone: '555-555-5555',
-          address: '123 Main St',
+          card_type: 'Student Card',
           city: 'Anytown',
+          relation: 'brother',
           country: 'USA',
         },
         // add more rows as needed
       ];
 
   return (
-    <>
-     <div className="flex w-full">
-        <SideNav />
-       <div className='w-full bg-white'>
-          <NavBar  />
-          <div className='py-2'>
-            <div className="text-2xl text-sky-600 text-center font-bold">All Requests</div>
-            <div className="w-11/12 mx-auto">
-                <ReactTable cols={columns} data={data} />
+    <div>
+        <div className="flex justify-between w-full">
+            <SideNav />
+            <div className="w-full bg-white">
+                <NavBar />
+
+                <div className='w-11/12 mx-auto py-2'>
+                    <div className='text-2xl font-bold text-center text-sky-600'>My Dependants</div>
+                    <ReactTable cols={columns} data={data} />
+                </div>
             </div>
-          </div>
         </div>
-     </div>
-    </>
+    </div>
   )
 }

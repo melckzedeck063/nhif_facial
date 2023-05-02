@@ -75,7 +75,7 @@ function SideNav() {
                       <Link style={{ textDecoration: "none" }} to='/requests' className="no-underline hover:text-white text-gray-100"> All Requests </Link>
                     </li>
                     <li className="text-gray-800 p-2 px-3 space-x-2 text-sm flex items-center cursor-pointer hover:bg-light-white rounded-md ">
-                      <Link style={{ textDecoration: "none" }} to='#' className="no-underline hover:text-white text-gray-100"> New Request </Link>
+                      <Link style={{ textDecoration: "none" }} to='/new_request' className="no-underline hover:text-white text-gray-100"> New Request </Link>
                     </li>
                     {/* <li className="text-gray-800 p-2 px-3 space-x-2 text-sm flex items-center cursor-pointer hover:bg-light-white rounded-md ">
                       <Link style={{ textDecoration: "none" }} to='#' className="no-underline hover:text-white text-gray-100"> Inactive Vendors </Link>
@@ -91,7 +91,7 @@ function SideNav() {
                   <span className='text-xl block float-left pr-1'>
                     <AiIcons.AiOutlineOrderedList />
                   </span>
-                  <span className={`text-base flex-1 font-lightt ${!open && "hidden"}`}> Orders </span>
+                  <span className={`text-base flex-1 font-lightt ${!open && "hidden"}`}> Dependants </span>
                   <IoIcons.IoMdArrowDropup className={`text-xl ${!open && "hidden"} ${!subOrders && "rotate-180"}`} onClick={() => setSubOrders(!subOrders)} />
                 </Link>
               </li>
@@ -99,20 +99,12 @@ function SideNav() {
                 subOrders && open && (
                   <ul>
                     <li className="text-gray-800 p-2 px-3 space-x-2 text-sm flex items-center cursor-pointer hover:bg-light-white rounded-md ">
-                      <Link style={{ textDecoration: "none" }} to='/all_orders' className="no-underline hover:text-white text-gray-100"> All Orders </Link>
+                      <Link style={{ textDecoration: "none" }} to='/dependants' className="no-underline hover:text-white text-gray-100"> My Dependants </Link>
                     </li>
                     <li className="text-gray-800 p-2 px-3 space-x-2 text-sm flex items-center cursor-pointer hover:bg-light-white rounded-md ">
-                      <Link style={{ textDecoration: "none" }} to='/all_orders' className="no-underline hover:text-white text-gray-100"> My Orders </Link>
+                      <Link style={{ textDecoration: "none" }} to='/new_dependant' className="no-underline hover:text-white text-gray-100"> Dependant Request  </Link>
                     </li>
-                    <li className="text-gray-800 p-2 px-3 space-x-2 text-sm flex items-center cursor-pointer hover:bg-light-white rounded-md ">
-                      <Link style={{ textDecoration: "none" }} to='/all_orders' className="no-underline hover:text-white text-gray-100"> My Received Orders </Link>
-                    </li>
-                    <li className="text-gray-800 p-2 px-3 space-x-2 text-sm flex items-center cursor-pointer hover:bg-light-white rounded-md ">
-                      <Link style={{ textDecoration: "none" }} to='/all_orders' className="no-underline hover:text-white text-gray-100"> Pending Orders </Link>
-                    </li>
-                    <li className="text-gray-800 p-2 px-3 space-x-2 text-sm flex items-center cursor-pointer hover:bg-light-white rounded-md ">
-                      <Link style={{ textDecoration: "none" }} to='/order_status' className="no-underline hover:text-white text-gray-100"> Order Status </Link>
-                    </li>
+                    
                   </ul>
                 )
               }
