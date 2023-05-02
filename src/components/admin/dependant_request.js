@@ -38,10 +38,9 @@ const schema = Yup.object({
     .string()
     .required()
     .trim(),
-    email: Yup
+    relation: Yup
     .string()
     .required()
-    .email()
     .trim(),
 })
 
@@ -74,7 +73,7 @@ export default function DependantRequest() {
                 lastName: '',
                 dob: '',
                 telephone: '',
-                email: '',
+                relation: '',
                 password: '',
                 confirmPassword : '',
                 card_type : ''
@@ -97,7 +96,7 @@ export default function DependantRequest() {
                                  <img src={image} alt="" className='h-32 w-32' />
                             </div>             
                           <div className="p-2">
-                              <p className="text-center text-3xl font-bold mb-4 text-sky-600">Request Card</p>
+                              <p className="text-center text-3xl font-bold mb-4 text-sky-600">Request Dependant Card</p>
                               <form onSubmit={handleSubmit(onSubmit)} className="py-2 px-1">
                             <div className="grid grid-cols-2 gap-1 w-full mx-auto mb-3">
                                       <div className="w-10/12 xsm:w-full sm:w-11/12 mx-auto">
@@ -156,13 +155,18 @@ export default function DependantRequest() {
                                           <span className="text-red-500 text-sm">{ errors.telephone?.message }</span>
                                 </div>
                                 <div className="w-10/12 xsm:w-full sm:w-11/12 mx-auto">
-                                    <label htmlFor="Email Address" className='text-sky-600'>Email Address</label> <br />
-                                    <input type="text" placeholder='Email Address' 
-                                              className={`rounded-md border-2 w-11/12 focus:outline-none px-2 xl:py-2 lg:py-2 md:py-2 py-1 ${errors.email?"border-red-500" : "border-sky-500"} `}
-                                     defaultValue={""}
-                                     {...register("email")}
-                                    />
-                                    <span className="text-red-500 text-sm">{ errors.email?.message }</span>
+                                    <label htmlFor="Email Address" className='text-sky-600'>Relationship</label> <br />
+                                    <select name="" id=""
+                                    className={`rounded-md w-11/12 border-2 focus:outline-none px-2 xl:py-2 lg:py-2 md:py-2 py-1 ${errors.relation? "border-red-500" : "border-sky-500"} `}
+                                    defaultValue={""}
+                                    {...register("relation")}
+                                    >
+                                        <option value="">Select Relationship</option>
+                                        <option value="Children">Children</option>
+                                        <option value="Parent">Parent</option>
+                                        <option value="Sibling">Sibling</option>
+                                    </select>
+                                    <span className="text-red-500 text-sm">{ errors.relation?.message }</span>
                                 </div>
                             </div>
                             <div className="grid grid-cols-2 gap-1 w-full mx-auto mb-3">

@@ -42,7 +42,7 @@ const ReactTable = ({cols,data}) => {
           {page.map((row) => {
             prepareRow(row);
             return (
-              <tr {...row.getRowProps()} className='border-b border-slate-100'>
+              <tr {...row.getRowProps()} className='border-b border-slate-200'>
                 {row.cells.map((cell) => (
                   <td {...cell.getCellProps()} className="p-2 font-light text-sm">
                     {cell.render('Cell')}

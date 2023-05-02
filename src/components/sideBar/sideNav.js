@@ -75,11 +75,11 @@ function SideNav() {
                       <Link style={{ textDecoration: "none" }} to='/requests' className="no-underline hover:text-white text-gray-100"> All Requests </Link>
                     </li>
                     <li className="text-gray-800 p-2 px-3 space-x-2 text-sm flex items-center cursor-pointer hover:bg-light-white rounded-md ">
+                      <Link style={{ textDecoration: "none" }} to='/pending_requests' className="no-underline hover:text-white text-gray-100">Pending Requests </Link>
+                    </li>
+                    <li className="text-gray-800 p-2 px-3 space-x-2 text-sm flex items-center cursor-pointer hover:bg-light-white rounded-md ">
                       <Link style={{ textDecoration: "none" }} to='/new_request' className="no-underline hover:text-white text-gray-100"> New Request </Link>
                     </li>
-                    {/* <li className="text-gray-800 p-2 px-3 space-x-2 text-sm flex items-center cursor-pointer hover:bg-light-white rounded-md ">
-                      <Link style={{ textDecoration: "none" }} to='#' className="no-underline hover:text-white text-gray-100"> Inactive Vendors </Link>
-                    </li> */}
                   </ul>
                 )
               }
@@ -109,7 +109,7 @@ function SideNav() {
                 )
               }
 
-              <li className={`text-gray-800 py-2.5 space-x-1 text-sm hover:px-1  cursor-pointer hover:bg-light-white hover:text-gray-800 rounded-md mt-2`}>
+              {/* <li className={`text-gray-800 py-2.5 space-x-1 text-sm hover:px-1  cursor-pointer hover:bg-light-white hover:text-gray-800 rounded-md mt-2`}>
                 <Link style={{ textDecoration: "none" }} to='#' className="flex items-center hover:text-white no-underline text-gray-100 ">
                   <span className='text-xl block float-left pr-1'>
                     <MdIcons.MdCategory />
@@ -132,14 +132,14 @@ function SideNav() {
                     </li>
                   </ul>
                 )
-              }
+              } */}
 
-              <li className={`text-gray-800 py-2.5 space-x-1 text-sm hover:px-1  cursor-pointer hover:bg-light-white hover:text-gray-800 rounded-md mt-2`}>
+              {/* <li className={`text-gray-800 py-2.5 space-x-1 text-sm hover:px-1  cursor-pointer hover:bg-light-white hover:text-gray-800 rounded-md mt-2`}>
                 <Link style={{ textDecoration: "none" }} to='#' className="flex items-center hover:text-white no-underline text-gray-100 ">
                   <span className='text-xl block float-left pr-1'>
                     <FaIcons.FaProductHunt />
                   </span>
-                  <span className={`text-base flex-1 font-lightt ${!open && "hidden"}`}> Products </span>
+                  <span className={`text-base flex-1 font-lightt ${!open && "hidden"}`}> Verification </span>
                   <IoIcons.IoMdArrowDropup className={`text-xl ${!open && "hidden"} ${!subProducts && "rotate-180"}`} onClick={() => setSubProducts(!subProducts)} />
                 </Link>
               </li>
@@ -147,7 +147,7 @@ function SideNav() {
                 subProducts && open && (
                   <ul>
                     <li className="text-gray-800 p-2 px-3 space-x-2 text-sm flex items-center cursor-pointer hover:bg-light-white rounded-md ">
-                      <Link style={{ textDecoration: "none" }} to='/product_list' className="no-underline hover:text-white text-gray-100"> All Products </Link>
+                      <Link style={{ textDecoration: "none" }} to='/product_list' className="no-underline hover:text-white text-gray-100"> Verify User </Link>
                     </li>
                     <li className="text-gray-800 p-2 px-3 space-x-2 text-sm flex items-center cursor-pointer hover:bg-light-white rounded-md ">
                       <Link style={{ textDecoration: "none" }} to='/my-company-products' className="no-underline hover:text-white text-gray-100"> My Company Products </Link>
@@ -160,9 +160,9 @@ function SideNav() {
                     </li>
                   </ul>
                 )
-              }
+              } */}
 
-              <li className={`text-gray-800 py-2.5 space-x-1 text-sm hover:px-1  cursor-pointer hover:bg-light-white hover:text-gray-800 rounded-md mt-2`}>
+              {/* <li className={`text-gray-800 py-2.5 space-x-1 text-sm hover:px-1  cursor-pointer hover:bg-light-white hover:text-gray-800 rounded-md mt-2`}>
                 <Link style={{ textDecoration: "none" }} to='#' className="flex items-center hover:text-white no-underline text-gray-100 ">
                   <span className='text-xl block float-left pr-1'>
                     <MdIcons.MdEventNote />
@@ -185,7 +185,7 @@ function SideNav() {
                     </li>
                   </ul>
                 )
-              }
+              } */}
 
               <li className={`text-gray-800 py-2.5 space-x-1 text-sm hover:px-1  cursor-pointer hover:bg-light-white hover:text-gray-800 rounded-md mt-2 ${userRole !== "ADMIN" && "hidden"}`}>
                 <Link style={{ textDecoration: "none" }} to='#' className="flex items-center hover:text-white no-underline text-gray-100 ">
@@ -200,24 +200,34 @@ function SideNav() {
                 subMenuOpen && open && (
                   <ul>
                     <li className="text-gray-800 p-2 px-3 space-x-2 text-sm flex items-center cursor-pointer hover:bg-light-white rounded-md ">
-                      <Link style={{ textDecoration: "none" }} to='/my-company-users' className="no-underline hover:text-white text-gray-100"> My Company Users</Link>
+                      <Link style={{ textDecoration: "none" }} to='/staffs' className="no-underline hover:text-white text-gray-100"> Staffs</Link>
                     </li>
                     <li className="text-gray-800 p-2 px-3 space-x-2 text-sm flex items-center cursor-pointer hover:bg-light-white rounded-md ">
-                      <Link style={{ textDecoration: "none" }} to='#' className="no-underline hover:text-white text-gray-100"> My Company Active Users</Link>
+                      <Link style={{ textDecoration: "none" }} to='/customers' className="no-underline hover:text-white text-gray-100"> Customers</Link>
                     </li>
-                    <li className="text-gray-800 p-2 px-3 space-x-2 text-sm flex items-center cursor-pointer hover:bg-light-white rounded-md ">
+                    {/* <li className="text-gray-800 p-2 px-3 space-x-2 text-sm flex items-center cursor-pointer hover:bg-light-white rounded-md ">
                       <Link style={{ textDecoration: "none" }} to='#' className="no-underline hover:text-white text-gray-100"> My Company Inactive Users </Link>
-                    </li>
+                    </li> */}
                   </ul>
                 )
               }
 
-              <li className={`text-gray-800 py-2.5 space-x-1 text-sm  cursor-pointer hover:bg-light-white hover:text-gray-800 hover:px-1 rounded-md mt-2`}>
+              {/* <li className={`text-gray-800 py-2.5 space-x-1 text-sm  cursor-pointer hover:bg-light-white hover:text-gray-800 hover:px-1 rounded-md mt-2`}>
                 <Link style={{ textDecoration: "none" }} to='/reports' className="flex items-center hover:text-white no-underline text-gray-100 ">
                   <span className='text-xl block float-left pr-1'>
                     <SiIcons.SiSimpleanalytics />
                   </span>
                   <span className={`text-base flex-1 ml-0.5 font-lightt ${!open && "hidden"}`}> Reports </span>
+
+                </Link>
+              </li> */}
+              
+              <li className={`text-gray-800 py-2.5 space-x-1 text-sm  cursor-pointer hover:bg-light-white hover:text-gray-800 hover:px-1 rounded-md mt-2`}>
+                <Link style={{ textDecoration: "none" }} to='/reports' className="flex items-center hover:text-white no-underline text-gray-100 ">
+                  <span className='text-xl block float-left pr-1'>
+                    <SiIcons.SiSimpleanalytics />
+                  </span>
+                  <span className={`text-base flex-1 ml-0.5 font-lightt ${!open && "hidden"}`}> Verification </span>
 
                 </Link>
               </li>
