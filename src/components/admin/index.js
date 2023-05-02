@@ -81,10 +81,10 @@ function Dashboard() {
                      
                     ) : <> */}
                     <div className="grid grid-cols-1 gap-6 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 w-11/12 mx-auto mb-4">
-                  <DashCard heading={"RECEIVED ORDERS"} data={0} />
-                  <DashCard heading={"PENDING ORDERS"} data={0} />
-                  <DashCard heading={"PROCESSED ORDERS"} data={0}/>
-                  <DashCard heading={"DELIVERED ORDERS"} data={0}  />
+                  <DashCard heading={"RECEIVED REQUESTS"} data={0} />
+                  <DashCard heading={"PENDING REQUESTS"} data={0} />
+                  <DashCard heading={"PROCESSED REQUESTS"} data={0}/>
+                  <DashCard heading={"DELIVERED REQUESTS"} data={0}  />
                 </div>
                       {/* </> */}
                   {/* ) :  null
@@ -113,8 +113,8 @@ function Dashboard() {
                   </>
                     ) : */}
                       <div className="grid grid-cols-1 gap-2 w-11/12 mx-auto">
-                          <NewCard data={'$28.4'} heading={"Sales"} />
-                          <NewCard data={64} heading={"Orders"} />
+                          <NewCard data={'28.4'} heading={"STAFFS"} />
+                          <NewCard data={64} heading={"CUSTOMERS"} />
                         </div>
                         {/* ) :  null 
                      } */}

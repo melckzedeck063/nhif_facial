@@ -8,7 +8,6 @@ import * as MdIcons from 'react-icons/md'
 const ReactTable = ({cols,data}) => {
 
   // console.log(cols);
-
   
   const columnsMemo = useMemo(() => cols, []);
   const dataMemo = useMemo(() => data, []);

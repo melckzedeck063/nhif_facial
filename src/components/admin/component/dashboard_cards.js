@@ -10,7 +10,7 @@ function DashCards({heading,data}) {
                       <p className="text-sm">{ heading }</p>
                     <p className="flex space-x-4">
                           <span className="font-bold text-xl"> { data } </span>
-                          <span className="text-green_deep mt-1">Orders</span>
+                          <span className="text-green_deep mt-1">Requests</span>
                     </p>
                  </div>
                  <div className="bg-sky-600 p-1 rounded shadow">
