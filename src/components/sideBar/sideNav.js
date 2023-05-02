@@ -41,7 +41,7 @@ function SideNav() {
           <div className={`pt-4 p-3 h-screen  bg-sky-600 backdrop-blur-sm ${open ? "w-44 xl:w-52 lg:w-52 duration-300" : "w-14 duration-300"}  text-gray-800 relative`}>
             <BsIcons.BsArrowLeft onClick={() => setOpen(!open)} className={`bg-white duration-300 text-slate-800 hover:font-bold hover:cursor-pointer rounded-full border border-cool-teal p-1 text-3xl absolute right-0.5 top-1 ${!open && "rotate-180"} `} />
             <div className="inline-flex mb-3 py-2 -ml-1 mt-2">
-//               <GiIcons.GiFarmTractor className={`bg-white ${!open ? "text-3xl font-medium ml-1 mt-1.5" : "text-4xl -ml-1"} rounded text-slate-700 cursor-pointer block float-left mr-2 ${open && "rotate-[360deg]"} duration-500`} />
+            //<GiIcons.GiFarmTractor className={`bg-white ${!open ? "text-3xl font-medium ml-1 mt-1.5" : "text-4xl -ml-1"} rounded text-slate-700 cursor-pointer block float-left mr-2 ${open && "rotate-[360deg]"} duration-500`} />
               <h1 className={`text-2xl text-white font-bold origin-left ${!open && "scale-0"}`}>NHIF</h1>
             </div>
             <div className={`bg-light-white -ml-1 rounded-md flex items-center py-1 ${open ? "px-3" : "px-1"}`}>
