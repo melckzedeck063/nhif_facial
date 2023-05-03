@@ -4,9 +4,10 @@ import { useForm } from 'react-hook-form';
 import * as Yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useNavigate } from 'react-router';
-// import { useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
 // import { signupUser } from '../../store/actions/user_actions';
 import image from '../../assets/images/NHIF_Official_Logo.png'
+import { signUpUser } from '../../store/actions/user_actions';
 
 const schema = Yup.object({
     firstName: Yup
@@ -54,7 +55,7 @@ const schema = Yup.object({
 function SignupUser() {
 
     const navigate = useNavigate();
-    // const dispatch =  useDispatch()
+    const dispatch =  useDispatch()
 
     const { register, handleSubmit, reset, formState : {errors, isValid, isDirty, isSubmitSuccessful} } = useForm({
         mode: 'all',
@@ -65,7 +66,7 @@ function SignupUser() {
 
     const onSubmit = data => {
         console.log(data)
-        // dispatch( signupUser(data) )
+        dispatch( signUpUser(data) )
     }
 
 

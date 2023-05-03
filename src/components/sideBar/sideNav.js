@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 // import { Menus } from './menus'
 import { Link, useNavigate } from 'react-router-dom'
 import { motion } from 'framer-motion';
@@ -11,9 +11,10 @@ import * as SiIcons from 'react-icons/si';
 import * as AiIcons from 'react-icons/ai'
 import * as FaIcons from 'react-icons/fa';
 import * as GiIcons from 'react-icons/gi';
-// import * as FiIcons  from 'react-icons/fi';
+import * as FiIcons  from 'react-icons/fi';
 
 import image from '../../assets/images/NHIF_Official_Logo.png'
+import { AuthContext } from '../../context';
 
 function SideNav() {
 
@@ -31,6 +32,13 @@ function SideNav() {
 
   const [userRole, setUserRole] = useState("ADMIN");
   const navigate = useNavigate();
+
+  const context = useContext(AuthContext);
+  // console.log(context)
+  
+  const handleLogout = () => {
+    context.handleLogout();
+  }
 
   return (
     <>
@@ -243,6 +251,15 @@ function SideNav() {
                     <AiIcons.AiFillSetting />
                   </span>
                   <span className={`text-base flex-1 font-lightt ${!open && "hidden"}`}> Settings </span>
+                </Link>
+              </li>
+
+              <li  onClick={() =>  handleLogout()} className={`text-gray-800  bg-red-400 py-1.5 ml-2 space-x-3 pl-2 text-sm hover:px-1  cursor-pointer hover:bg-light-white hover:text-gray-800 rounded-md mt-2`}>
+                <Link style={{ textDecoration: "none" }} to='#' className="flex items-center hover:text-white no-underline text-gray-100 ">
+                  <span className='text-xl block float-left pr-1'>
+                    <FiIcons.FiLogOut />
+                  </span>
+                  <span className={`text-base text-centerr flex-1 font-lightt ${!open && "hidden"}`}> Logout </span>
                 </Link>
               </li>
             </ul>

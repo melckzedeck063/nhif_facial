@@ -1,42 +1,57 @@
-import React from 'react'
+import React, {useState, useEffect} from 'react'
 import NavBar from '../containers/header'
 import SideNav from '../sideBar/sideNav'
 import ReactTable from './component/table_card'
 
 import * as FaIcons from 'react-icons/fa';
 import * as MdIcons from 'react-icons/md'
+import { useDispatch, useSelector } from 'react-redux';
+import { getAllStaffs } from '../../store/actions/user_actions';
 
 export default function AllStaffs() {
+
+  const [renders, setRenders] =  useState(0);
+  const dispatch = useDispatch();
+
+
+  const staffs  =  useSelector(state  => state.users);
+  // console.log(staffs.staffs);
+
+  setTimeout(() => {
+    if(renders  < 5){
+      setRenders(renders => renders + 1);
+    }
+  }, 1000);
+
+  useEffect(() =>{
+    if(staffs && staffs.staffs &&  staffs.staffs.length < 1 &&  renders <= 3){
+       dispatch( getAllStaffs() )
+    }
+  })
 
     const columns = [
         {
           Header: 'FirstName',
-          accessor: 'firstname',
+          accessor: 'firstName',
         },
         {
             Header: 'LastName',
-            accessor: 'lastname',
+            accessor: 'lastName',
           },
-        {
-          Header: 'Age',
-          accessor: 'age',
-        },
+       
         {
           Header: 'Email',
           accessor: 'email',
         },
         {
           Header: 'Phone',
-          accessor: 'phone',
+          accessor: 'telephone',
         },
         {
           Header: 'Position',
-          accessor: 'postion',
+          accessor: 'role',
         },
-        {
-          Header: 'City',
-          accessor: 'city',
-        },
+        
         {
           Header: 'Country',
           accessor: 'country',
@@ -59,26 +74,16 @@ export default function AllStaffs() {
 
       const data = [
         {
-          firstname: 'John',
-          lastname: 'Doe',
+          firstname: '',
+          lastname: '',
           age: 30,
-          email: 'john.doe@example.com',
-          phone: '555-555-5555',
-          postion: 'Bursar',
-          city: 'Anytown',
-          country: 'USA',
+          email: 'Loading',
+          phone: '',
+          postion: '',
+          city: '',
+          country: '',
         },
-        {
-          firstname: 'Melckzedeck',
-          lastname : 'James',
-          age: 30,
-          email: 'john.doe@example.com',
-          phone: '555-555-5555',
-          postion: 'IT Officer',
-          city: 'Anytown',
-          country: 'USA',
-        },
-        // add more rows as needed
+        
       ];
 
   return (
@@ -89,9 +94,19 @@ export default function AllStaffs() {
           <NavBar  />
           <div className='py-2'>
             <div className="text-2xl text-sky-600 text-center font-bold">Our Staffs</div>
-            <div className="w-11/12 mx-auto">
+            {
+              staffs.staffs?.data?.data ?(
+              <div className="w-11/12 mx-auto">
+                <ReactTable cols={columns} data={staffs.staffs.data.data} />
+            </div>
+              )
+              : 
+              <>
+                <div className="w-11/12 mx-auto">
                 <ReactTable cols={columns} data={data} />
             </div>
+            </>
+            }
           </div>
         </div>
      </div>

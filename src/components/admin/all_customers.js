@@ -1,45 +1,56 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import NavBar from '../containers/header'
 import SideNav from '../sideBar/sideNav'
 import ReactTable from './component/table_card'
 
 import * as FaIcons from 'react-icons/fa';
 import * as MdIcons from 'react-icons/md'
+import { useDispatch, useSelector } from 'react-redux';
+import { getAllCustomers } from '../../store/actions/user_actions';
 
 export default function AllCustomers() {
+
+  const [renders, setRenders] =  useState(0);
+  const dispatch = useDispatch();
+
+
+  const customers  =  useSelector(state  => state.users);
+  // console.log(customers.users);
+
+  setTimeout(() => {
+    if(renders  < 5){
+      setRenders(renders => renders + 1);
+    }
+  }, 1000);
+
+  useEffect(() =>{
+    if(customers && customers.users &&  customers.users.length < 1 &&  renders <= 3){
+       dispatch( getAllCustomers() )
+    }
+  })
 
     const columns = [
         {
           Header: 'FirstName',
-          accessor: 'firstname',
+          accessor: 'firstName',
         },
         {
             Header: 'LastName',
-            accessor: 'lastname',
+            accessor: 'lastName',
           },
-        {
-          Header: 'Age',
-          accessor: 'age',
-        },
+        
         {
           Header: 'Email',
           accessor: 'email',
         },
         {
           Header: 'Phone',
-          accessor: 'phone',
-        },
+          accessor: 'telephone',
+        },       
+        
         {
-          Header: 'Address',
-          accessor: 'address',
-        },
-        {
-          Header: 'City',
-          accessor: 'city',
-        },
-        {
-          Header: 'Country',
-          accessor: 'country',
+          Header: 'Position',
+          accessor: 'role',
         },
         {
           Header: 'Actions',
@@ -57,29 +68,23 @@ export default function AllCustomers() {
         },
       ];
 
-      const data = [
-        {
-          firstname: 'John',
-          lastname: 'Doe',
-          age: 30,
-          email: 'john.doe@example.com',
-          phone: '555-555-5555',
-          address: '123 Main St',
-          city: 'Anytown',
-          country: 'USA',
-        },
-        {
-          firstname: 'Melckzedeck',
-          lastname : 'James',
-          age: 30,
-          email: 'john.doe@example.com',
-          phone: '555-555-5555',
-          address: '123 Main St',
-          city: 'Anytown',
-          country: 'USA',
-        },
+// let  data = [];
+//       if(customers.users && customers.users.data.data){
+//         data.push(customers.users.data.data)
+//       } 
+//       else {
+    const data = [
+          {
+            firstname: '',
+            lastname : '',
+            email: 'loading',
+            phone: '',
+            country: '',
+          },
+    ]
+      // }
         // add more rows as needed
-      ];
+      
 
   return (
     <>
@@ -89,9 +94,19 @@ export default function AllCustomers() {
           <NavBar  />
           <div className='py-2'>
             <div className="text-2xl text-sky-600 text-center font-bold">Our Customers</div>
-            <div className="w-11/12 mx-auto">
+            {
+              customers.users?.data?.data ?(
+              <div className="w-11/12 mx-auto">
+                <ReactTable cols={columns} data={customers.users.data.data} />
+            </div>
+              )
+              : 
+              <>
+                <div className="w-11/12 mx-auto">
                 <ReactTable cols={columns} data={data} />
             </div>
+            </>
+            }
           </div>
         </div>
      </div>

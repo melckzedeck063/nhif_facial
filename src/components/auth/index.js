@@ -5,10 +5,11 @@ import { useNavigate } from 'react-router'
 import { useForm } from 'react-hook-form';
 import * as Yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup'
-// import { AuthContext, AuthProvider } from '../../context'
+import { AuthContext, AuthProvider } from '../../context'
 // import { signinUser } from '../../store/actions/user_actions'
-// import { useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import image from '../../assets/images/NHIF_Official_Logo.png'
+import { signInUser } from '../../store/actions/user_actions';
 
 const schema = Yup.object ({
     username: Yup
@@ -27,9 +28,9 @@ const schema = Yup.object ({
 function Login() {
 
     const navigate = useNavigate();
-    // const dispatch = useDispatch();
+    const dispatch = useDispatch();
     
-    // const context = useContext(AuthContext)
+    const context = useContext(AuthContext)
     // console.log(context)
 
     const { register, handleSubmit, reset, formState: { errors, isDirty, isValid, isSubmitSuccessful } } = useForm({
@@ -40,33 +41,32 @@ function Login() {
     })
 
     const onSubmit = data => {
-        navigate('/dashboard')
-        console.log(data)
+        // navigate('/dashboard')
+        // console.log(data)
+
+        dispatch(signInUser(data));
 
         setTimeout(() => {
-        }, 2000);
-        // dispatch(signinUser(data))
-
-        // setTimeout(() => {
-        //     const storage = sessionStorage.getItem('authenticatedUser');
-        //     const { roles } = JSON.parse(storage);
-        //     if (roles.includes("ADMIN" && "SELLER")) {
-        //         navigate('/dashboard', {role : "ADMIN"})
-        //     }
-        //     else if (roles.includes("SELLER" && !"ADMIN")) {
-        //         navigate('/dashboard', {role : "SELLER"})
-        //     }
-        //     else {
-        //         console.log("is customer")
-        //         navigate('/my_orders', {role : "CUSTOMER"})
-        //     }
-        // }, 2000);
-        // userLogin()
+            const storage = sessionStorage.getItem('token');
+            const user = JSON.parse(storage);
+            console.log(user)
+            if (user.token !== null && user.token !== undefined && user.token !== "") {
+                navigate('/dashboard', {role : "ADMIN"})
+            }
+            // else if (roles.includes("SELLER" && !"ADMIN")) {
+            //     navigate('/dashboard', {role : "SELLER"})
+            // }
+            // else {
+            //     console.log("is customer")
+            //     navigate('/my_orders', {role : "CUSTOMER"})
+            // }
+        }, 2500);
+        userLogin()
     }
 
-    // const userLogin = () => {
-    //     context.handleLogin()
-    // }
+    const userLogin = () => {
+        context.handleLogin()
+    }
     // console.log(errors)
     
     useEffect(() => {
