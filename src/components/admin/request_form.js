@@ -327,7 +327,7 @@ function NewRequest() {
 
                                 </div>
                                     <div className="mx-auto flex space-x-4 w-9/12 py-4">    
-                                       <button type='button' onClick={handlePartOne}  style={{ width: '80%'}} className="rounded shadow px-2 mx-auto py-1 bg-sky-600 text-white font-medium">Previous</button>        
+                                       <button type='button' onClick={handlePartOne}  style={{ width: '80%'}} className="rounded shadow px-2 mx-auto py-1 bg-green-600 text-white font-medium">Previous</button>        
                                        <button type="submit" disabled={!isValid || !isDirty} style={{ width: '80%'}} className="rounded shadow px-2 mx-auto py-1 bg-sky-600 text-white font-medium">Next</button>
                                    </div>
                                         </div>

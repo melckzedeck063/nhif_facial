@@ -60,7 +60,7 @@ function Login() {
             //     console.log("is customer")
             //     navigate('/my_orders', {role : "CUSTOMER"})
             // }
-        }, 2500);
+        }, 3500);
         userLogin()
     }
 
