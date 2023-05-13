@@ -15,6 +15,7 @@ import AllCustomers from './components/admin/all_customers';
 import { AuthProvider } from './context';
 import ProtectedRoute from './context/protect'
 import UpdateUser from './components/admin/editUser';
+import FormOne from './components/admin/component/form_one';
 
 function App() {
   return (
@@ -30,6 +31,7 @@ function App() {
              <Route path='/requests' element={ <ProtectedRoute>  <AllRequests /> </ProtectedRoute> } />
              <Route path='/pending_requests' element={ <ProtectedRoute>  <PendingRequests/>  </ProtectedRoute> } />
              <Route path='/new_request' element={ <ProtectedRoute> <NewRequest /> </ProtectedRoute> } />
+             <Route path='/dependant_form' element={ <ProtectedRoute> <FormOne /> </ProtectedRoute> } />
              <Route path='/dependants' element={ <ProtectedRoute>  <MyDependants />  </ProtectedRoute> } />
              <Route path='/new_dependant' element={ <ProtectedRoute>  <DependantRequest />  </ProtectedRoute>} />
              <Route path='/staffs' element={<ProtectedRoute>  <AllStaffs /> </ProtectedRoute> } />

@@ -4,11 +4,12 @@ import { useForm } from 'react-hook-form';
 import * as Yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useNavigate } from 'react-router';
-// import { useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
 // import { signupUser } from '../../store/actions/user_actions';
 import image from '../../assets/images/NHIF_Official_Logo.png'
 import NavBar from '../containers/header';
 import SideNav from '../sideBar/sideNav';
+import FormTwo from './component/form_two';
 
 const schema = Yup.object({
     firstName: Yup
@@ -67,23 +68,23 @@ function NewRequest() {
 
     const navigate = useNavigate();
     const [file, setFile] = useState("");
-    // const dispatch =  useDispatch()
+    const dispatch =  useDispatch()
 
     const [partOne, setPartOne]  =  useState(true);
     const [partTwo, setPartTwo]  = useState(false);
-    const [partThree, setPartThree]  =  useState(false);
+    // const [partThree, setPartThree]  =  useState(false);
 
     const handlePartOne = () => {
         setPartOne(true);
         setPartTwo(false);
-        setPartThree(false);
+        // setPartThree(false);
         console.log('part One')
     }
 
     const handlePartTwo = () => {
         setPartOne(false);
         setPartTwo(true);
-        setPartThree(false);
+        // setPartThree(false);
         console.log('part two')
     }
 
@@ -101,6 +102,8 @@ function NewRequest() {
     const onSubmit = data => {
         console.log(data, formData, file)
         // dispatch( NewRequest(data) )
+
+        navigate('/dependant_form')
     }
 
 
@@ -245,7 +248,8 @@ function NewRequest() {
                                 {/* PART_TWO */}
                                 {
                                     partTwo &&(
-                                        <div className={``}>
+                                        <div className="">
+                                           <div className={``}>
                                     <div className="text-center font-bold py-3 text-sky-500 sm:text-sm xsm:text-sm text-lg">Nationality</div>
 
                                     <div className="grid grid-cols-2 gap-1 w-full mx-auto mb-3">
@@ -319,12 +323,14 @@ function NewRequest() {
                                    />
                           </div>
                             </div>
-                            <div className="mx-auto flex space-x-4 w-9/12 py-4">    
-                            <button type='button' onClick={handlePartOne}  style={{ width: '80%'}} className="rounded shadow px-2 mx-auto py-1 bg-sky-600 text-white font-medium">Previous</button>        
-                                  <button type='button' onClick={handlePartTwo}  style={{ width: '80%'}} className="rounded shadow px-2 mx-auto py-1 bg-sky-600 text-white font-medium">Next</button>
-                            </div> 
+                             
 
                                 </div>
+                                    <div className="mx-auto flex space-x-4 w-9/12 py-4">    
+                                       <button type='button' onClick={handlePartOne}  style={{ width: '80%'}} className="rounded shadow px-2 mx-auto py-1 bg-sky-600 text-white font-medium">Previous</button>        
+                                       <button type='button' onClick={handlePartTwo}  style={{ width: '80%'}} className="rounded shadow px-2 mx-auto py-1 bg-sky-600 text-white font-medium">Next</button>
+                                   </div>
+                                        </div>
                                     )
                                 }
                                 {/* END PARTTWO  */}
