@@ -4,6 +4,7 @@ import * as Yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
 import SideNav from '../../sideBar/sideNav';
 import NavBar from '../../containers/header';
+import { useNavigate } from 'react-router';
 
 const schema = Yup.object({
     firstName: Yup
@@ -36,6 +37,7 @@ const schema = Yup.object({
 export default function FormOne(){
 
     const [file,setFile] =  useState()
+    const  navigate = useNavigate();
 
     const formData = new FormData();
     formData.append('file', file)
@@ -51,7 +53,9 @@ export default function FormOne(){
         console.log(data, formData, file)
         // dispatch( NewRequest(data) )
 
-        // navigate('/dependant_form')
+        setTimeout(() => {
+            navigate('/dependant_2_form')
+        }, 2000);
     }
     return(
         <div className="flex w-full">

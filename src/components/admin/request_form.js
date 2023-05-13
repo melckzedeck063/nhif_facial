@@ -103,7 +103,9 @@ function NewRequest() {
         console.log(data, formData, file)
         // dispatch( NewRequest(data) )
 
-        navigate('/dependant_form')
+        setTimeout(() => {
+            navigate('/dependant_form')
+        }, 2000);
     }
 
 
