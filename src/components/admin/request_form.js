@@ -328,16 +328,16 @@ function NewRequest() {
                                 </div>
                                     <div className="mx-auto flex space-x-4 w-9/12 py-4">    
                                        <button type='button' onClick={handlePartOne}  style={{ width: '80%'}} className="rounded shadow px-2 mx-auto py-1 bg-sky-600 text-white font-medium">Previous</button>        
-                                       <button type='button' onClick={handlePartTwo}  style={{ width: '80%'}} className="rounded shadow px-2 mx-auto py-1 bg-sky-600 text-white font-medium">Next</button>
+                                       <button type="submit" disabled={!isValid || !isDirty} style={{ width: '80%'}} className="rounded shadow px-2 mx-auto py-1 bg-sky-600 text-white font-medium">Next</button>
                                    </div>
                                         </div>
                                     )
                                 }
                                 {/* END PARTTWO  */}
-                            
-                            <div className="mx-auto w-9/12 py-4">            
+                            {/* <div className="mx-auto w-9/12 py-4">            
                                   <button type="submit" disabled={!isValid || !isDirty} style={{ width: '80%'}}  className="rounded shadow px-2 mx-auto py-1 bg-sky-600 text-white font-medium">Submit</button>
-                            </div>
+                            </div> */}
+                            
                             
                               </form>
                           </div>
