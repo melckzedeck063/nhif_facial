@@ -14,6 +14,7 @@ import AllStaffs from './components/admin/all_staff';
 import AllCustomers from './components/admin/all_customers';
 import { AuthProvider } from './context';
 import ProtectedRoute from './context/protect'
+import UpdateUser from './components/admin/editUser';
 
 function App() {
   return (
@@ -32,6 +33,7 @@ function App() {
              <Route path='/dependants' element={ <ProtectedRoute>  <MyDependants />  </ProtectedRoute> } />
              <Route path='/new_dependant' element={ <ProtectedRoute>  <DependantRequest />  </ProtectedRoute>} />
              <Route path='/staffs' element={<ProtectedRoute>  <AllStaffs /> </ProtectedRoute> } />
+             <Route path='/profile/:id' element={<ProtectedRoute>  <UpdateUser /> </ProtectedRoute> } />
              <Route path='/customers' element={ <ProtectedRoute>  <AllCustomers />  </ProtectedRoute>} />
           </Routes>
           </AuthProvider>

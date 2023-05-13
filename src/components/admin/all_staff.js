@@ -7,11 +7,13 @@ import * as FaIcons from 'react-icons/fa';
 import * as MdIcons from 'react-icons/md'
 import { useDispatch, useSelector } from 'react-redux';
 import { getAllStaffs } from '../../store/actions/user_actions';
+import { useNavigate } from 'react-router';
 
 export default function AllStaffs() {
 
   const [renders, setRenders] =  useState(0);
   const dispatch = useDispatch();
+  const  navigate =  useNavigate();
 
 
   const staffs  =  useSelector(state  => state.users);
@@ -29,6 +31,15 @@ export default function AllStaffs() {
     }
   })
 
+  const handleEditBtn =  (id) => {
+    console.log('Edit btn with ID  : ', id );
+    navigate(`/profile/${id}`);
+  }
+
+  const handlDeleteBtn = (id)  => {
+    console.log('Delete Btn with ID : ',id)
+  }
+
     const columns = [
         {
           Header: 'FirstName',
@@ -37,6 +48,10 @@ export default function AllStaffs() {
         {
             Header: 'LastName',
             accessor: 'lastName',
+          },
+          {
+            Header: 'DOB',
+            accessor: 'dob',
           },
        
         {
@@ -54,17 +69,17 @@ export default function AllStaffs() {
         
         {
           Header: 'Country',
-          accessor: 'country',
+          accessor: 'nation',
         },
         {
           Header: 'Actions',
           accessor: 'actions',
-          Cell: () => (
+          Cell: ({row}) => (
             <>
-              <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold px-2 rounded mr-2">
+              <button onClick={() => handleEditBtn(row.original._id)} className="bg-blue-500 hover:bg-blue-700 text-white font-bold px-2 rounded mr-2">
                  <FaIcons.FaEdit className='font-2xl text-white m-1'  />
               </button>
-              <button className="bg-red-500 hover:bg-red-700 text-white font-bold px-2 rounded">
+              <button onClick={() => handlDeleteBtn(row.original._id) } className="bg-red-500 hover:bg-red-700 text-white font-bold px-2 rounded">
                   <MdIcons.MdDelete className='font-2xl text-white m-1'  />
               </button>
             </>

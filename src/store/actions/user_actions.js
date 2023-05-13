@@ -42,6 +42,8 @@ export  const  signUpUser =  createAsyncThunk('user/new', async(values)=>{
             firstName  :  values.firstName,
             lastName :   values.lastName,
             email :       values.email,
+            gender  :  values.gender,
+            dob :   values.dob,
             telephone :   values.telephone,
             password :  values.password,
             confirmPassword  :  values.confirmPassword
@@ -79,5 +81,39 @@ export const getAllCustomers  = createAsyncThunk('/all_users', async()  => {
     catch(error){
      console.log(error);
      return error.message
+    }
+})
+
+export const getUserById =  createAsyncThunk('/current/user', async(id)  => {
+    try{
+        const response =  await AUTH_API.get(`/user/${id}`);
+
+        // console.log(response.data);
+        return   response.data;
+    }
+    catch(error){
+        console.log(error);
+        return error.message
+    }
+})
+
+export const updateUser = createAsyncThunk('/update', async(values)=> {
+    try{
+        const response =  await AUTH_API.patch(`update_user/${values.id}`, {
+            firstName  :  values.firstName,
+            lastName :   values.lastName,
+            email :       values.email,
+            dob :   values.dob,
+            gender :  values.gender,
+            telephone :   values.telephone,
+            role :  values.role
+        })
+
+        console.log(response.data);
+        return  response.data;
+    }
+    catch(error){
+        console.log(error);
+        return  error.message
     }
 })
