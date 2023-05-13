@@ -49,13 +49,17 @@ export default function FormOne(){
         resolver : yupResolver(schema)
     })
 
+    const handleNextForm =  () => {
+        setTimeout(() => {
+            navigate('/dependant_2_form')
+        }, 2000);
+    }
+
     const onSubmit = data => {
         console.log(data, formData, file)
         // dispatch( NewRequest(data) )
 
-        setTimeout(() => {
-            navigate('/dependant_2_form')
-        }, 2000);
+        handleNextForm();
     }
     return(
         <div className="flex w-full">

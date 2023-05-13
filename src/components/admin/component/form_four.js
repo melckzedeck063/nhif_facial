@@ -62,7 +62,7 @@ export default function FormFour(){
                   <div className="mx-auto w-11/12 lg:w-8/12 xl:w-8/12">
                       <div className="rounded-md shadow  py-10 bg-white w-full">  
 
-                        <div className="text-center font-bold text-sky-500 textlg sm:text-sm xsm:text-sm">Second Dependant Details</div>
+                        <div className="text-center font-bold text-sky-500 textlg sm:text-sm xsm:text-sm">Fourth Dependant Details</div>
                         <form onSubmit={handleSubmit(onSubmit)} className="py-2 px-1">
              .    <div className="grid grid-cols-2 gap-1 w-full mx-auto mb-3">
                                       <div className="w-10/12 xsm:w-full sm:w-11/12 mx-auto">

@@ -117,7 +117,7 @@ function UpdateUser() {
           <NavBar />
               {/* <NavBar /> */}
               <div className="bg-slate-50 py-10">
-                  <div className="mx-auto w-11/12 lg:w-6/12 xl:w-6/12">
+                  <div className="mx-auto w-11/12 lg:w-8/12 xl:w-8/12">
                       <div className="rounded-md shadow bg-white w-full">
 
                         {
