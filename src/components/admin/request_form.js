@@ -4,12 +4,13 @@ import { useForm } from 'react-hook-form';
 import * as Yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useNavigate } from 'react-router';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 // import { signupUser } from '../../store/actions/user_actions';
 import image from '../../assets/images/NHIF_Official_Logo.png'
 import NavBar from '../containers/header';
 import SideNav from '../sideBar/sideNav';
 import FormTwo from './component/form_two';
+import { myProfile } from '../../store/actions/user_actions';
 
 const schema = Yup.object({
     firstName: Yup
@@ -69,10 +70,26 @@ function NewRequest() {
     const navigate = useNavigate();
     const [file, setFile] = useState("");
     const dispatch =  useDispatch()
+    const [reload, setReload] =  useState(0);
 
     const [partOne, setPartOne]  =  useState(true);
     const [partTwo, setPartTwo]  = useState(false);
     // const [partThree, setPartThree]  =  useState(false);
+
+    setTimeout(() => {
+        if(reload  < 5){
+            setReload(reload  => reload + 1);
+        }
+    }, 1000);
+
+    const profile  =  useSelector(state => state.users);
+    console.log(profile.user_profile);
+
+    useEffect(() =>  {
+        if(profile && profile.user_profile === null && reload  < 4){
+            dispatch( myProfile() )
+        }
+    })
 
     const handlePartOne = () => {
         setPartOne(true);

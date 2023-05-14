@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { useNavigate } from 'react-router'
 // import NavBar from '../navbar';
 // import MainLayout from '../../hoc';
@@ -29,6 +29,7 @@ function Login() {
 
     const navigate = useNavigate();
     const dispatch = useDispatch();
+    const [message, setMessage] = useState(false);
     
     const context = useContext(AuthContext)
     // console.log(context)
@@ -51,6 +52,7 @@ function Login() {
             const user = JSON.parse(storage);
             console.log(user)
             if (user.token !== null && user.token !== undefined && user.token !== "") {
+                setMessage(true)
                 navigate('/dashboard', {role : "ADMIN"})
             }
             // else if (roles.includes("SELLER" && !"ADMIN")) {
@@ -60,13 +62,17 @@ function Login() {
             //     console.log("is customer")
             //     navigate('/my_orders', {role : "CUSTOMER"})
             // }
-        }, 3500);
+        }, 4500);
         userLogin()
     }
 
     const userLogin = () => {
         context.handleLogin()
     }
+
+    setTimeout(() => {
+        setMessage(false)
+    }, 2000);
     // console.log(errors)
     
     useEffect(() => {
@@ -92,7 +98,18 @@ function Login() {
                         <form  onSubmit={handleSubmit(onSubmit)} className="mx-auto py-4 px-6 xsm:px-1 sm:px-2 text-slate-800">
                                     <div className="text-center">
                                         <h4 className="text-4xl font-bold text-sky-600 py-3">Sign In</h4>
-                                    </div>  
+                                    </div> 
+
+                                    <div className="">
+                                        {message && (
+                                     <div class="p-4 mb-4 text-sm text-green-800 rounded-lg bg-green-50 dark:bg-gray-800 dark:text-green-400" role="alert">
+
+                                            <span class="font-medium">Successfull loged in!</span> 
+                                          </div>
+                                        )}
+                                    
+                                    </div> 
+
                                     <div className="mb-1 pb-3 w-9/12 mx-auto">
                                         <label htmlFor="Username" className="font-medium text-sky-600">Username</label> <br />
                                         <input type="email" placeholder='Enter username' className={`rounded-md focus:outline-none bg-transparent border-2 px-2 py-2 ${errors.username? "border-red-500" : "border-sky-500"} w-full `}

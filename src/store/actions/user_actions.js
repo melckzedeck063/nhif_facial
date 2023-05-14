@@ -117,3 +117,17 @@ export const updateUser = createAsyncThunk('/update', async(values)=> {
         return  error.message
     }
 })
+
+export const myProfile =  createAsyncThunk('/profile', async()  => {
+    try{
+        const response =  await AUTH_API.get('/me');
+
+        console.log(response.data);
+        return response.data;
+        
+    }
+    catch(error){
+        console.log(error);
+        return error.message
+    }
+})
