@@ -11,6 +11,8 @@ import NavBar from '../containers/header';
 import SideNav from '../sideBar/sideNav';
 import FormTwo from './component/form_two';
 import { myProfile } from '../../store/actions/user_actions';
+import {sendRequest} from '../../store/actions/request_actions'
+import moment from 'moment';
 
 const schema = Yup.object({
     firstName: Yup
@@ -83,10 +85,10 @@ function NewRequest() {
     }, 1000);
 
     const profile  =  useSelector(state => state.users);
-    console.log(profile.user_profile);
+    // console.log(profile.user_profile);
 
     useEffect(() =>  {
-        if(profile && profile.user_profile === null && reload  < 4){
+        if(profile && profile.user_profile === null && reload  < 3){
             dispatch( myProfile() )
         }
     })
@@ -117,8 +119,8 @@ function NewRequest() {
     })
 
     const onSubmit = data => {
-        console.log(data, formData, file)
-        // dispatch( NewRequest(data) )
+        // console.log(data, formData, file)
+        dispatch( sendRequest(data) )
 
         setTimeout(() => {
             navigate('/dependant_form')
@@ -159,8 +161,10 @@ function NewRequest() {
                               <form onSubmit={handleSubmit(onSubmit)} className="py-2 px-1">
                                 {/* PART_ONE   */}
                                 {
+                                profile?.user_profile?.data?.data?(
+                                    <>
+                                {
                                     partOne &&(
-
                                 <div className={``}>
                                 <div className="text-center font-bold py-3 text-sky-500 sm:text-sm border-bb mb-2 border-slate-300 xsm:text-sm text-lg">Personal Details</div>
                                 <div className="grid grid-cols-2 gap-1 w-full mx-auto mb-3">
@@ -168,7 +172,7 @@ function NewRequest() {
                                     <label htmlFor="Firstname" className='text-sky-600'>Firstname</label> <br />
                                           <input type="text" placeholder='Firstname'
                                            className={`rounded-md w-11/12 border-2 focus:outline-none px-2 xl:py-2 lg:py-2 md:py-2 py-1 ${ errors.firstName? "border-red-500" : "border-sky-500" }  `}
-                                           defaultValue={""}
+                                           defaultValue={profile.user_profile.data.data.firstName}
                                            {...register("firstName")}
                                      />
                                           <span className="text-red-500 text-sm">{ errors.firstName?.message }</span>
@@ -177,7 +181,7 @@ function NewRequest() {
                               <label htmlFor="Lastname" className='text-sky-600'>Lastname</label> <br />
                                     <input type="text" placeholder='Lastname'
                                      className={`rounded-md w-11/12 border-2 focus:outline-none px-2 xl:py-2 lg:py-2 md:py-2 py-1 ${errors.lastName? "border-red-500" : "border-sky-500"} `}
-                                     defaultValue={""}
+                                     defaultValue={profile.user_profile.data.data.lastName}
                                      {...register("lastName")}
                                />
                                     <span className="text-red-500 text-sm">{ errors.lastName?.message }</span>
@@ -189,32 +193,28 @@ function NewRequest() {
                               <label htmlFor="Lastname" className='text-sky-600'>Surname</label> <br />
                                     <input type="text" placeholder='Surname' 
                                      className={`rounded-md w-11/12 border-2 focus:outline-none px-2 xl:py-2 lg:py-2 md:py-2 py-1 ${errors.surname? "border-red-500" : "border-sky-500"} `}
-                                     defaultValue={""}
+                                     defaultValue={profile.user_profile.data.data.middleName}
                                      {...register("surname")}
                                />
                                     <span className="text-red-500 text-sm">{ errors.surname?.message }</span>
                           </div>
 
-                                <div className="mx-auto w-11/12 mb-1  ml-3">
-                                    <label className='ml-2 text-sky-600' htmlFor="Gender">Gender </label> <br />
-                                    <input className='ml-2' type="radio" checked  name='gender' value={"Male"} placeholder='gender' 
-                                    //  defaultValue={""}
+                          <div className="w-10/12 xsm:w-full sm:w-11/12 mx-auto">
+                              <label htmlFor="Lastname" className='text-sky-600'>Gender</label> <br />
+                                    <input type="text" placeholder='gender' 
+                                     className={`rounded-md w-11/12 border-2 focus:outline-none px-2 xl:py-2 lg:py-2 md:py-2 py-1 ${errors.gender? "border-red-500" : "border-sky-500"} `}
+                                     defaultValue={profile.user_profile.data.data.gender}
                                      {...register("gender")}
-                                    /> Male
-                                    <input type="radio"  name='gender' value={"Female"} placeholder='gender' 
-                                    className='ml-3'
-                                    //  defaultValue={""}
-                                     {...register("gender")}
-                                    /> Female <br />
-                                     
-                                </div>
+                               />
+                                    <span className="text-red-500 text-sm">{ errors.surname?.message }</span>
+                          </div>
                             </div>
                             <div className="grid grid-cols-2 gap-1 w-full mx-auto mb-3">
                             <div className="w-10/12 xsm:w-full sm:w-11/12 mx-auto">
                               <label htmlFor="Lastname" className='text-sky-600'>Date of Birth</label> <br />
-                                    <input type="date" 
+                                    <input type="text" placeholder='date of birth' 
                                      className={`rounded-md w-11/12 border-2 focus:outline-none px-2 xl:py-2 lg:py-2 md:py-2 py-1 ${errors.dob? "border-red-500" : "border-sky-500"} `}
-                                     defaultValue={""}
+                                     defaultValue={profile.user_profile.data.data.dob}
                                      {...register("dob")}
                                />
                                     <span className="text-red-500 text-sm">{ errors.dob?.message }</span>
@@ -223,7 +223,7 @@ function NewRequest() {
                                     <label htmlFor="Email Address" className='text-sky-600'>Email Address</label> <br />
                                     <input type="text" placeholder='Email Address' 
                                               className={`rounded-md border-2 w-11/12 focus:outline-none px-2 xl:py-2 lg:py-2 md:py-2 py-1 ${errors.email?"border-red-500" : "border-sky-500"} `}
-                                     defaultValue={""}
+                                     defaultValue={profile.user_profile.data.data.email}
                                      {...register("email")}
                                     />
                                     <span className="text-red-500 text-sm">{ errors.email?.message }</span>
@@ -234,7 +234,7 @@ function NewRequest() {
                                     <label htmlFor="Telephone" className='text-sky-600'>Telephone</label> <br />
                                           <input type="tel" placeholder='Telephone'
                                            className={`rounded-md w-11/12 border-2 focus:outline-none px-2 xl:py-2 lg:py-2 md:py-2 py-1 ${errors.telephone?"border-red-500" : "border-sky-500"}`}
-                                           defaultValue={""}
+                                           defaultValue={profile.user_profile.data.data.telephone}
                                            {...register("telephone")}
                                      />
                                           <span className="text-red-500 text-sm">{ errors.telephone?.message }</span>
@@ -247,9 +247,6 @@ function NewRequest() {
                                     defaultValue={""}
                                     {...register("card_type")}
                                     >
-                                        <option value="">Select Card Type</option>
-                                        <option value="Student card">Student Card</option>
-                                        <option value="Children card">Children Card</option>
                                         <option value="Employee card">Employee Card</option>
                                     </select>
                                     <span className="text-red-500 text-sm">{ errors.card_type?.message }</span>
@@ -261,6 +258,13 @@ function NewRequest() {
                             </div> 
                                 </div>
                                     )
+                                }
+                                    </>
+                                )
+                                : 
+                                <>
+                                  <div className="text-lg text-sky-600 text-center font-medium animate-pulse">Loading .......</div>
+                                </>
                                 }
                                 {/* END PART_ONE  */}
 
