@@ -19,6 +19,9 @@ import FormOne from './components/admin/component/form_one';
 import FormTwo from './components/admin/component/form_two';
 import FormThree from './components/admin/component/form_three';
 import FormFour from './components/admin/component/form_four';
+import Settings from './components/admin/settings_router';
+import VerificationCard from './components/admin/card_verification';
+import Success from './components/admin/success';
 
 function App() {
   return (
@@ -43,6 +46,9 @@ function App() {
              <Route path='/staffs' element={<ProtectedRoute>  <AllStaffs /> </ProtectedRoute> } />
              <Route path='/profile/:id' element={<ProtectedRoute>  <UpdateUser /> </ProtectedRoute> } />
              <Route path='/customers' element={ <ProtectedRoute>  <AllCustomers />  </ProtectedRoute>} />
+             <Route path='/app-settings' element={ <ProtectedRoute>  <Settings />  </ProtectedRoute>} />
+             <Route path='/reports' element={ <ProtectedRoute>  <VerificationCard />  </ProtectedRoute>} />
+             <Route path='/success' element={ <ProtectedRoute>  <Success />  </ProtectedRoute>} />
           </Routes>
           </AuthProvider>
        </BrowserRouter>

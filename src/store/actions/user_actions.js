@@ -130,4 +130,4 @@ export const myProfile =  createAsyncThunk('/profile', async()  => {
         console.log(error);
         return error.message
     }
-})
+});

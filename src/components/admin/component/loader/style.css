@@ -1,0 +1,16 @@
+.loader{
+    left: 47%;
+    transform: translateX(-47%);
+    border-bottom: 3px solid black !important;
+    border-top: 3px solid rgb(255, 0, 0) !important;
+    border-right: 3px solid rgb(19, 230, 0) !important;
+    animation:2s rotate linear infinite;
+}
+@keyframes rotate{
+    from{
+        transform: rotate(0deg);
+    }
+    to{
+        transform: rotate(360deg);
+    }
+}
