@@ -4,6 +4,8 @@ import * as Yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
 import SideNav from '../../sideBar/sideNav';
 import NavBar from '../../containers/header';
+import { registerDependant } from '../../../store/actions/dependant_action';
+import { useDispatch } from 'react-redux';
 
 const schema = Yup.object({
     firstName: Yup
@@ -34,7 +36,7 @@ const schema = Yup.object({
 })
 
 export default function FormFour(){
-
+    const dispatch = useDispatch();
     const [file,setFile] =  useState()
 
     const formData = new FormData();
@@ -48,8 +50,8 @@ export default function FormFour(){
     })
 
     const onSubmit = data => {
-        console.log(data, formData, file)
-        // dispatch( NewRequest(data) )
+        // console.log(data, formData, file)
+        dispatch( registerDependant(data) )
 
         // navigate('/dependant_form2')
     }

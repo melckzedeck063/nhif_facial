@@ -14,6 +14,7 @@ import { myProfile } from '../../store/actions/user_actions';
 import { checkUserExistance, sendRequest, verifyUser } from '../../store/actions/request_actions'
 import moment from 'moment';
 import Loader from './component/loader/loader';
+import { customerDependants } from '../../store/actions/dependant_action';
 
 const schema = Yup.object({
     
@@ -95,7 +96,7 @@ function VerificationCard() {
     })
 
     const verified_user = useSelector(state => state.request)
-    console.log(verified_user.user)
+    console.log("VERIFIED: ",verified_user.user);
 
     const handlePartOne = () => {
         setPartOne(true);
@@ -129,6 +130,7 @@ function VerificationCard() {
 
     const onSubmit = data => {
         // console.log(data, formData, file)
+        dispatch(customerDependants())
         dispatch(sendRequest(data))
 
         setTimeout(() => {

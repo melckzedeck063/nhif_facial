@@ -5,6 +5,8 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import SideNav from '../../sideBar/sideNav';
 import NavBar from '../../containers/header';
 import { useNavigate } from 'react-router';
+import { registerDependant } from '../../../store/actions/dependant_action';
+import { useDispatch } from 'react-redux';
 
 const schema = Yup.object({
     firstName: Yup
@@ -35,7 +37,7 @@ const schema = Yup.object({
 })
 
 export default function FormThree(){
-
+    const dispatch = useDispatch();
     const [file,setFile] =  useState()
     const navigate =  useNavigate();
 
@@ -50,8 +52,8 @@ export default function FormThree(){
     })
 
     const onSubmit = data => {
-        console.log(data, formData, file)
-        // dispatch( NewRequest(data) )
+        // console.log(data, formData, file)
+        dispatch( registerDependant(data) )
 
         setTimeout(() => {
             navigate('/dependant_4_form')
