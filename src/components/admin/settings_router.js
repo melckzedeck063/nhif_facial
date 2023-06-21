@@ -7,8 +7,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import image from '../../assets/images/NHIF_Official_Logo.png'
 import NavBar from '../containers/header';
 import SideNav from '../sideBar/sideNav';
-import { myProfile } from '../../store/actions/user_actions';
-import { sendRequest } from '../../store/actions/request_actions';
+import { myProfile, updateMe } from '../../store/actions/user_actions';
 import dataforC from './json_files/countries.json'
 import Loader from './component/loader/loader';
 import './style.css';
@@ -31,23 +30,23 @@ const schema = Yup.object({
         .string()
         .required()
         .trim(),
-    nationality: Yup
-        .string()
-        .required()
-        .trim(),
-    region: Yup
-        .string()
-        .required()
-        .trim(),
-    check_no: Yup
-        .string()
-        .required()
-        .trim(),
-    nida_no: Yup
-        .string()
-        .required()
-        .min(16)
-        .trim(),
+    // nationality: Yup
+    //     .string()
+    //     .required()
+    //     .trim(),
+    // region: Yup
+    //     .string()
+    //     .required()
+    //     .trim(),
+    // check_no: Yup
+    //     .string()
+    //     .required()
+    //     .trim(),
+    // nida_no: Yup
+    //     .string()
+    //     .required()
+    //     .min(16)
+    //     .trim(),
     gender: Yup
         .string()
         .required()
@@ -60,11 +59,11 @@ const schema = Yup.object({
         .string()
         .required()
         .trim(),
-    email: Yup
-        .string()
-        .required()
-        .email()
-        .trim(),
+    // email: Yup
+    //     .string()
+    //     .required()
+    //     .email()
+    //     .trim(),
 })
 
 function Settings() {
@@ -72,7 +71,7 @@ function Settings() {
     const [file, setFile] = useState("");
     const dispatch = useDispatch()
     const [reload, setReload] = useState(0);
-    const [profileImg, setProfileImg] = useState('');
+    // const [profileImg, setProfileImg] = useState('');
 
 
     let country = new Yup.array();
@@ -88,7 +87,8 @@ function Settings() {
 
     useEffect(() => {
         if (profile && profile.user_profile === null && reload < 3) {
-            dispatch(myProfile())
+            dispatch(myProfile());
+
         }
     })
 
@@ -102,43 +102,47 @@ function Settings() {
         resolver: yupResolver(schema)
     })
 
+    // const onSubmit = data => {
+    //     dispatch(updateMe(data));
+
+    //     setTimeout(() => {
+    //         navigate('/success')
+    //     }, 4000);
+    // }
+    // const openHandle = () => {
+    //     let photoget = document.getElementById("photoget");
+    //     photoget.click();
+    // }
+    // const newpost = () => {
+    //     let photoget, file, reader;
+    //     photoget = document.getElementById("photoget");
+    //     file = photoget.files[0];
+    //     reader = new FileReader();
+    //     if (file) {
+    //         reader.readAsDataURL(file);
+    //         reader.onloadstart = function () {
+    //             console.log("Post Analysing ...");
+    //         }
+    //         reader.onload = function () {
+    //             setProfileImg(this.result);
+    //             console.log("Successiful Uploaded");
+
+    //         }
+    //         reader.onloadend = function () {
+    //         }
+    //         reader.onerror = function () {
+    //             alert("Opps, there was and Error During Upload");
+    //         }
+    //     }else{
+    //         console.log("No choice");
+    //     }
+    // }
     const onSubmit = data => {
-        dispatch(sendRequest(data))
+        dispatch(updateMe(data));
 
         setTimeout(() => {
-            navigate('/')
-        }, 2000);
-    }
-    const openHandle = () => {
-        let photoget = document.getElementById("photoget");
-        photoget.click();
-    }
-    const newpost = () => {
-        let photoget, file, reader;
-        photoget = document.getElementById("photoget");
-        file = photoget.files[0];
-        reader = new FileReader();
-        if (file) {
-            reader.readAsDataURL(file);
-            reader.onloadstart = function () {
-                console.log("Post Analysing ...");
-            }
-            reader.onload = function () {
-                setProfileImg(this.result);
-                console.log("Successiful Uploaded");
-
-            }
-            reader.onloadend = function () {
-            }
-            reader.onerror = function () {
-                alert("Opps, there was and Error During Upload");
-            }
-        }else{
-            console.log("No choice");
-        }
-    }
-    const sucesspg = () => {
-        navigate('/success');
+            // navigate('/success')
+        }, 4000);
     }
     useEffect(() => {
         if (isSubmitSuccessful) {
@@ -151,7 +155,7 @@ function Settings() {
                 password: '',
                 confirmPassword: '',
                 card_type: '',
-                telephone: ''
+                nationality:''
 
             })
         }
@@ -176,14 +180,14 @@ function Settings() {
                                                         <div className="w-28 h-28 mx-auto" style={{
                                                             position: 'relative'
                                                         }}>
-                                                            <div className='overlaying rounded-full'>
-                                                                {/* file uploader */}
+                                                            {/* <div className='overlaying rounded-full'>
+                                                                file uploader
                                                                 <button onClick={openHandle} style={{
                                                                     position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%,-50%)', fontWeight: '', color: 'rgb(214, 214, 214)'
                                                                 }} className='text-sm'>CHANGE</button>
                                                                 <input type='file' hidden id='photoget' onChange={newpost} accept='image/*' />
-                                                            </div>
-                                                            <img src={profileImg?.length > 0 ? profileImg : "https://img.freepik.com/free-psd/3d-illustration-person-with-sunglasses_23-2149436188.jpg?w=740&t=st=1687014519~exp=1687015119~hmac=3498c407f0d4ba1f17bcf9ccebf7bb4a85d14055167a61fcbe5436e7a05f26a6"} alt="" className='w-30 h-30 rounded-full bg-slate-100 ring-2 ring-blue-sky m-profile' />
+                                                            </div> */}
+                                                            <img src={image} alt="" className='w-30 h-30 ' />
                                                         </div>
                                                         <div className="grid grid-cols-2 gap-1 w-full mx-auto mb-3">
                                                             <div className="w-10/12 xsm:w-full sm:w-11/12 mx-auto">
@@ -211,7 +215,7 @@ function Settings() {
                                                                 <label htmlFor="Lastname" className='text-sky-600'>Surname</label> <br />
                                                                 <input type="text" placeholder='Surname'
                                                                     className={`rounded-md w-11/12 border-2 focus:outline-none px-2 xl:py-2 lg:py-2 md:py-2 py-1 ${errors.surname ? "border-red-500" : "border-sky-500"} `}
-                                                                    defaultValue={profile.user_profile.data.data.middleName}
+                                                                    defaultValue={profile.user_profile.data.data.surname}
                                                                     {...register("surname")}
                                                                 />
                                                                 <span className="text-red-500 text-sm">{errors.surname?.message}</span>
@@ -278,7 +282,7 @@ function Settings() {
 
                                                         </div>
                                                         <div className="mx-auto w-9/12 py-4 pt-center">
-                                                            <button type="submit" /*disabled={!isValid || !isDirty}*/  style={{ width: '50%', padding: '10px',margin:'10px' }} className="rounded shadow px-2 mx-auto py-1 bg-sky-600 text-white font-medium" onClick={sucesspg}><div style={{position:'relative',zIndex:'2'}}>Submit</div></button>
+                                                            {/* <button type="submit"  style={{ width: '50%', padding: '10px',margin:'10px' }} className="rounded shadow px-2 mx-auto py-1 bg-sky-600 text-white font-medium"><div style={{position:'relative',zIndex:'2'}}>Submit</div></button> */}
                                                         </div>
                                                     </div>
                                                 </>

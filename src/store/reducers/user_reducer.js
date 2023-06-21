@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { getAllCustomers, getAllStaffs, getUserById, myProfile, signInUser, signUpUser, updateUser } from "../actions/user_actions";
+import {  getAllCustomers, getAllStaffs, getUserById, myProfile, signInUser, signUpUser, updateMe, updateUser } from "../actions/user_actions";
 
 
 export const userSlice = createSlice({
@@ -115,6 +115,19 @@ export const userSlice = createSlice({
             state.user_profile = action.payload
         })
         .addCase(myProfile.rejected, (state,action) => {
+            state.status = "Failed";
+            state.message = "Request  failed please try again";
+            state.error = action.error.message
+        })
+        .addCase(updateMe.pending,(state,action) => {
+            state.status = "Loading"
+        })
+        .addCase(updateMe.fulfilled, (state,action) => {
+            state.status = "Successfull";
+            state.message = "New account created  succesfully ";
+            state.user_profile = action.payload
+        })
+        .addCase(updateMe.rejected, (state,action) => {
             state.status = "Failed";
             state.message = "Request  failed please try again";
             state.error = action.error.message

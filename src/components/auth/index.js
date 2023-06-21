@@ -10,8 +10,9 @@ import { AuthContext, AuthProvider } from '../../context'
 import { useDispatch } from 'react-redux';
 import image from '../../assets/images/NHIF_Official_Logo.png'
 import { signInUser } from '../../store/actions/user_actions';
+import Loader from '../admin/component/loader/loader';
 
-const schema = Yup.object ({
+const schema = Yup.object({
     username: Yup
         .string()
         .required("Please fill out username is required")
@@ -21,7 +22,7 @@ const schema = Yup.object ({
         .string()
         .required("Please fill out password is required")
         .trim()
-    
+
 })
 
 
@@ -30,7 +31,7 @@ function Login() {
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const [message, setMessage] = useState(false);
-    
+
     const context = useContext(AuthContext)
     // console.log(context)
 
@@ -53,7 +54,7 @@ function Login() {
             console.log(user)
             if (user.token !== null && user.token !== undefined && user.token !== "") {
                 setMessage(true)
-                navigate('/dashboard', {role : "ADMIN"})
+                navigate('/dashboard', { role: "ADMIN" })
             }
             // else if (roles.includes("SELLER" && !"ADMIN")) {
             //     navigate('/dashboard', {role : "SELLER"})
@@ -74,79 +75,92 @@ function Login() {
         setMessage(false)
     }, 2000);
     // console.log(errors)
-    
+
     useEffect(() => {
         if (isSubmitSuccessful) {
             reset({
                 username: "",
-                password : ""
+                password: ""
             })
         }
     })
+    const btnclick = () => {
+        let btncliker = document.getElementById("btncliker"),
+            loaderL = document.getElementById("loaderL");
+        btncliker.style.display = "none";
+        loaderL.style.display = "block";
+        setTimeout(() => {
+            btncliker.style.display = "block";
+            loaderL.style.display = "none";
+        }, 6000);
+
+
+    }
     return (
-      <>
-       {/* <AuthProvider> */}
-          {/* <MainLayout> */}
-          {/* <NavBar /> */}
-              <div className=" bg-slate-50 py-20 md:py-20 lg:py-20 xl:py-20">
-                  
-                        <div className="w-5/12 lg:w-6/12 xsm:w-11/12 sm:w-9/12 md:w-8/12 mx-auto">
-                            <div className="bg-white rounded-md shadow-md hover:shadow-xl"> 
-                            <div className="w-32 h-32 mx-auto">
-                                 <img src={image} alt="" className='h-32 w-32' />
-                            </div>                              
-                        <form  onSubmit={handleSubmit(onSubmit)} className="mx-auto py-4 px-6 xsm:px-1 sm:px-2 text-slate-800">
-                                    <div className="text-center">
-                                        <h4 className="text-4xl font-bold text-sky-600 py-3">Sign In</h4>
-                                    </div> 
+        <>
+            {/* <AuthProvider> */}
+            {/* <MainLayout> */}
+            {/* <NavBar /> */}
+            <div className=" bg-slate-50 py-20 md:py-20 lg:py-20 xl:py-20">
 
-                                    <div className="">
-                                        {message && (
-                                     <div class="p-4 mb-4 text-sm text-green-800 rounded-lg bg-green-50 dark:bg-gray-800 dark:text-green-400" role="alert">
+                <div className="w-5/12 lg:w-6/12 xsm:w-11/12 sm:w-9/12 md:w-8/12 mx-auto">
+                    <div className="bg-white rounded-md shadow-md hover:shadow-xl">
+                        <div className="w-32 h-32 mx-auto">
+                            <img src={image} alt="" className='h-32 w-32' />
+                        </div>
+                        <form onSubmit={handleSubmit(onSubmit)} className="mx-auto py-4 px-6 xsm:px-1 sm:px-2 text-slate-800">
+                            <div className="text-center">
+                                <h4 className="text-4xl font-bold text-sky-600 py-3">Sign In</h4>
+                            </div>
 
-                                            <span class="font-medium">Successfull loged in!</span> 
-                                          </div>
-                                        )}
-                                    
-                                    </div> 
+                            <div className="">
+                                {message && (
+                                    <div class="p-4 mb-4 text-sm text-green-800 rounded-lg bg-green-50 dark:bg-gray-800 dark:text-green-400" role="alert">
 
-                                    <div className="mb-1 pb-3 w-9/12 mx-auto">
-                                        <label htmlFor="Username" className="font-medium text-sky-600">Username</label> <br />
-                                        <input type="email" placeholder='Enter username' className={`rounded-md focus:outline-none bg-transparent border-2 px-2 py-2 ${errors.username? "border-red-500" : "border-sky-500"} w-full `}
-                                            defaultValue={""}
-                                            {...register("username")}
-                                        />
-                                        <span className="text-sm text-red-500"> {errors.username?.message} </span>
+                                        <span class="font-medium">Successfull loged in!</span>
                                     </div>
-                                    <div className="mb-1 pb-3 w-9/12 mx-auto">
-                                        <label htmlFor="Username" className="font-medium text-sky-600">Password</label> <br />
-                                        <input type="password" placeholder='Enter password' className={`rounded-md focus:outline-none bg-transparent border-2 px-2 py-2 ${errors.password? "border-red-500" : "border-sky-500"} w-full `}
-                                            defaultValue={""}
-                                            {...register("password")}
-                                        />
-                                        <span className="text-sm text-red-500"> {errors.password?.message} </span>
-                                    </div>
-                                    <div className="mt-2 pb-1 w-full text-center mx-auto">
-                                  <button type="submit" disabled={!isValid || !isDirty } className="rounded-sm py-1 px-4 text-slate-50 bg-sky-600 hover:shadow-xl font-medium w-9/12 mx-auto">Login</button>
-                                </div>
-                           </form>
-                                <div className="mx-auto w-10/12">
-                                    {/* <div className=" rounded hover: bg-slate-700 text-white">                                        */}
-                                    <p onClick={() => navigate('/forget') } className="font-medium animate-pulse cursor-pointer text-sky-600 mb-4 text-center"> Forget your password? </p>
-                                    {/* </div> */}
-                                    <p  className="text-slate-500 text-center mb-2">Don't have an account ?</p>
-                                
-                                    <div className="w-5/12  md:w-5/12 lg:w-5/12 xl:w-5/12 mx-auto mb-4 pb-8 xl:pl-6 lg:pl-6 md:pl-4">       
-                                    <button onClick={() => navigate('/register')} className="rounded-md text-center border-2 border-sky-600 hover:bg-sky-600 hover:shadow-xl hover:text-white font-medium shadow-m px-4 py-1">Sign Up</button>
-                                    </div>
-                                </div>
+                                )}
+
+                            </div>
+
+                            <div className="mb-1 pb-3 w-9/12 mx-auto">
+                                <label htmlFor="Username" className="font-medium text-sky-600">Username</label> <br />
+                                <input type="email" placeholder='Enter username' className={`rounded-md focus:outline-none bg-transparent border-2 px-2 py-2 ${errors.username ? "border-red-500" : "border-sky-500"} w-full `}
+                                    defaultValue={""}
+                                    {...register("username")}
+                                />
+                                <span className="text-sm text-red-500"> {errors.username?.message} </span>
+                            </div>
+                            <div className="mb-1 pb-3 w-9/12 mx-auto">
+                                <label htmlFor="Username" className="font-medium text-sky-600">Password</label> <br />
+                                <input type="password" placeholder='Enter password' className={`rounded-md focus:outline-none bg-transparent border-2 px-2 py-2 ${errors.password ? "border-red-500" : "border-sky-500"} w-full `}
+                                    defaultValue={""}
+                                    {...register("password")}
+                                />
+                                <span className="text-sm text-red-500"> {errors.password?.message} </span>
+                            </div>
+                            <div className="mt-2 pb-1 w-full text-center mx-auto">
+                                <button type="submit" disabled={!isValid || !isDirty} className="rounded-sm py-1 px-4 text-slate-50 bg-sky-600 hover:shadow-xl font-medium w-9/12 mx-auto" id='btncliker' onClick={btnclick}>Login</button>
+                                <div id='loaderL' style={{ display: 'none' }}><Loader /></div>
+                            </div>
+                        </form>
+                        <div className="mx-auto w-10/12">
+                            {/* <div className=" rounded hover: bg-slate-700 text-white">                                        */}
+                            {/* <p onClick={() => navigate('/forget')} className="font-medium animate-pulse cursor-pointer text-sky-600 mb-4 text-center"> Forget your password? </p> */}
+                            {/* </div> */}
+                            <p className="text-slate-500 text-center mb-2">Don't have an account ?</p>
+
+                            <div className="w-5/12  md:w-5/12 lg:w-5/12 xl:w-5/12 mx-auto mb-4 pb-8 xl:pl-6 lg:pl-6 md:pl-4">
+                                <button onClick={() => navigate('/register')} className="rounded-md text-center border-2 border-sky-600 hover:bg-sky-600 hover:shadow-xl hover:text-white font-medium shadow-m px-4 py-1">Sign Up</button>
                             </div>
                         </div>
-                  </div>
-       {/* </MainLayout> */}
-    {/* </AuthProvider> */}
-      </>
-  )
+                    </div>
+                </div>
+            </div>
+            {/* </MainLayout> */}
+            {/* </AuthProvider> */}
+        </>
+    )
 }
 
 export default Login

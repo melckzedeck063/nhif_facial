@@ -11,61 +11,58 @@ import NavBar from '../containers/header';
 import SideNav from '../sideBar/sideNav';
 import FormTwo from './component/form_two';
 import { myProfile } from '../../store/actions/user_actions';
-import { sendRequest } from '../../store/actions/request_actions'
+import { checkUserExistance, sendRequest, verifyUser } from '../../store/actions/request_actions'
 import moment from 'moment';
 import Loader from './component/loader/loader';
 
 const schema = Yup.object({
-    username: Yup
-        .string()
-        .required()
-        .trim(),
+    
     surname: Yup
         .string()
         .required()
         .trim(),
-    cardnumber: Yup
-        .string()
-        .required()
-        .trim(),
-    card_type: Yup
-        .string()
-        .required()
-        .trim(),
-    nationality: Yup
-        .string()
-        .required()
-        .trim(),
-    region: Yup
-        .string()
-        .required()
-        .trim(),
-    check_no: Yup
-        .string()
-        .required()
-        .trim(),
-    nida_no: Yup
-        .string()
-        .required()
-        .min(16)
-        .trim(),
-    gender: Yup
-        .string()
-        .required()
-        .trim(),
-    dob: Yup
-        .string()
-        .required()
-        .trim(),
+    // cardnumber: Yup
+    //     .string()
+    //     .required()
+    //     .trim(),
+    // card_type: Yup
+    //     .string()
+    //     .required()
+    //     .trim(),
+    // nationality: Yup
+    //     .string()
+    //     .required()
+    //     .trim(),
+    // region: Yup
+    //     .string()
+    //     .required()
+    //     .trim(),
+    // check_no: Yup
+    //     .string()
+    //     .required()
+    //     .trim(),
+    // nida_no: Yup
+    //     .string()
+    //     .required()
+    //     .min(16)
+    //     .trim(),
+    // gender: Yup
+    //     .string()
+    //     .required()
+    //     .trim(),
+    // dob: Yup
+    //     .string()
+    //     .required()
+    //     .trim(),
     telephone: Yup
         .string()
         .required()
         .trim(),
-    email: Yup
-        .string()
-        .required()
-        .email()
-        .trim(),
+    // email: Yup
+    //     .string()
+    //     .required()
+    //     .email()
+    //     .trim(),
 })
 
 function VerificationCard() {
@@ -79,20 +76,26 @@ function VerificationCard() {
     const [partTwo, setPartTwo] = useState(false);
     // const [partThree, setPartThree]  =  useState(false);
 
+
     setTimeout(() => {
         if (reload < 5) {
             setReload(reload => reload + 1);
         }
     }, 1000);
 
-    const profile = useSelector(state => state.users);
-    // console.log(profile.user_profile);
+
+
+    const user_signal = useSelector(state => state.request);
+    // console.log(user_signal.current_user);
 
     useEffect(() => {
-        if (profile && profile.user_profile === null && reload < 3) {
-            dispatch(myProfile())
+        if (user_signal && user_signal.current_user === null && reload < 3) {
+            dispatch(verifyUser())
         }
     })
+
+    const verified_user = useSelector(state => state.request)
+    console.log(verified_user.user)
 
     const handlePartOne = () => {
         setPartOne(true);
@@ -101,11 +104,14 @@ function VerificationCard() {
         console.log('part One')
     }
 
-    const handlePartTwo = () => {
-        setPartOne(false);
-        setPartTwo(true);
-        // setPartThree(false);
-        console.log('part two')
+    const handlePartTwo = (id) => {
+        dispatch(checkUserExistance(id))
+        setTimeout(() => {
+            setPartOne(false);
+            setPartTwo(true);
+            // setPartThree(false);
+        }, 4000);
+
     }
     const backhome = () => {
         navigate('/dashboard');
@@ -134,15 +140,12 @@ function VerificationCard() {
     useEffect(() => {
         if (isSubmitSuccessful) {
             reset({
-                username: '',
-                // middleName: '',
+
                 cardnumber: '',
                 dob: '',
                 telephone: '',
-                email: '',
-                password: '',
-                confirmPassword: '',
-                card_type: ''
+                surname: ''
+
 
             })
         }
@@ -163,8 +166,12 @@ function VerificationCard() {
                                     {/* <p className="text-center text-3xl font-bold mb-4 text-sky-600">Request Card</p> */}
                                     <form onSubmit={handleSubmit(onSubmit)} className="py-2 px-1">
                                         {/* PART_ONE   */}
-                                        {
+                                        {/* {
                                             profile?.user_profile?.data?.data ? (
+                                                <> */}
+
+                                        {
+                                            user_signal?.current_user?.data?.data[0] ? (
                                                 <>
                                                     {
                                                         partOne && (
@@ -172,26 +179,26 @@ function VerificationCard() {
                                                                 <div className="text-center font-bold py-3 text-sky-500 sm:text-sm border-bb mb-2 border-slate-300 xsm:text-sm text-lg"><span className='headline-m'>Card Verification</span></div>
                                                                 <div className="grid grid-cols-2 gap-1 w-full mx-auto mb-3">
                                                                     <div className="w-10/12 xsm:w-full sm:w-11/12 mx-auto">
-                                                                        <label htmlFor="username" className='text-sky-600'>Username</label> <br />
-                                                                        <input type="text" placeholder='username'
-                                                                            className={`rounded-md w-11/12 border-2 focus:outline-none px-2 xl:py-2 lg:py-2 md:py-2 py-1 ${errors.username ? "border-red-500" : "border-sky-500"}  `}
-                                                                            defaultValue={profile.user_profile.data.data.username}
-                                                                            {...register("username")}
+                                                                        <label htmlFor="surname" className='text-sky-600'>Full name</label> <br />
+                                                                        <input type="text" placeholder='surname'
+                                                                            className={`rounded-md w-11/12 border-2 focus:outline-none px-2 xl:py-2 lg:py-2 md:py-2 py-1 ${errors.surname ? "border-red-500" : "border-sky-500"}  `}
+                                                                            defaultValue={""}
+                                                                            {...register("surname")}
                                                                         />
-                                                                        <span className="text-red-500 text-sm">{errors.username?.message}</span>
+                                                                        <span className="text-red-500 text-sm">{errors.surname?.message}</span>
                                                                     </div>
                                                                     <div className="w-10/12 xsm:w-full sm:w-11/12 mx-auto">
-                                                                        <label htmlFor="cardnumber" className='text-sky-600'>Card Number</label> <br />
-                                                                        <input type="text" placeholder='cardnumber'
-                                                                            className={`rounded-md w-11/12 border-2 focus:outline-none px-2 xl:py-2 lg:py-2 md:py-2 py-1 ${errors.cardnumber ? "border-red-500" : "border-sky-500"} `}
-                                                                            defaultValue={profile.user_profile.data.data.cardnumber}
-                                                                            {...register("cardnumber")}
+                                                                        <label htmlFor="telephone" className='text-sky-600'>Phone Number</label> <br />
+                                                                        <input type="text" placeholder='telephone'
+                                                                            className={`rounded-md w-11/12 border-2 focus:outline-none px-2 xl:py-2 lg:py-2 md:py-2 py-1 ${errors.telephone ? "border-red-500" : "border-sky-500"} `}
+                                                                            defaultValue={""}
+                                                                            {...register("telephone")}
                                                                         />
-                                                                        <span className="text-red-500 text-sm">{errors.cardnumber?.message}</span>
+                                                                        <span className="text-red-500 text-sm">{errors.telephone?.message}</span>
                                                                     </div>
                                                                 </div>
                                                                 <div className="mx-auto w-9/12 py-4">
-                                                                    <button type='button' onClick={handlePartTwo} style={{ width: '80%' }} className="rounded shadow px-2 mx-auto py-1 bg-sky-600 text-white font-medium" /*disabled={!isValid || !isDirty}*/>Verify</button>
+                                                                    <button type='button' onClick={() => handlePartTwo(user_signal.current_user.data.data[0].photo_id)} style={{ width: '80%' }} className="rounded shadow px-2 mx-auto py-1 bg-sky-600 text-white font-medium" disabled={!isValid || !isDirty}>Verify</button>
                                                                 </div>
                                                             </div>
                                                         )
@@ -199,10 +206,15 @@ function VerificationCard() {
                                                 </>
                                             )
                                                 :
+                                                <><Loader/></>
+                                        }
+                                        {/* )
+                                                </>
+                                           :
                                                 <>
                                                     <div className="text-lg text-sky-600 text-center font-medium animate-pulse"><Loader/></div>
-                                                </>
-                                        }
+                                               </>
+                                     } */}
                                         {/* END PART_ONE  */}
 
                                         {/* PART_TWO */}
@@ -215,13 +227,35 @@ function VerificationCard() {
                                                         <div className="grid grid-cols-2 gap-1 w-full mx-auto mb-3">
                                                             <div className="w-10/12 xsm:w-full sm:w-11/12 mx-auto pt-center">
                                                                 <label htmlFor="username" className='text-sky-600 headline-m'>Card Number</label> <br />
-                                                                <p>{"9012-90-xxxxxxx"}</p>
+                                                                <p>{verified_user.user.data.data[0].card_no}</p>
+                                                            </div>
+                                                            <div className="w-10/12 xsm:w-full sm:w-11/12 mx-auto pt-center">
+                                                                <label htmlFor="cardnumber" className='text-sky-600 headline-m'>Full Name</label> <br />
+                                                                <p>{verified_user.user.data.data[0].user.firstName + ' '+ verified_user.user.data.data[0].user.middleName+ ' '+ verified_user.user.data.data[0].user.lastName}</p>
+                                                                {}
+                                                            </div>
+                                                        </div>
+                                                        <div className="grid grid-cols-2 gap-1 w-full mx-auto mb-3">
+                                                            <div className="w-10/12 xsm:w-full sm:w-11/12 mx-auto pt-center">
+                                                                <label htmlFor="username" className='text-sky-600 headline-m'>Card Number</label> <br />
+                                                                <p>{verified_user.user.data.data[0].user.gender}</p>
                                                             </div>
                                                             <div className="w-10/12 xsm:w-full sm:w-11/12 mx-auto pt-center">
                                                                 <label htmlFor="cardnumber" className='text-sky-600 headline-m'>Identity ( id )</label> <br />
-                                                                <p>{"9012-90-xxxxxxx"}</p>
+                                                                <p>{verified_user.user.data.data[0].user.dob}</p>
                                                             </div>
                                                         </div>
+                                                        <div className="grid grid-cols-2 gap-1 w-full mx-auto mb-3">
+                                                            <div className="w-10/12 xsm:w-full sm:w-11/12 mx-auto pt-center">
+                                                                <label htmlFor="username" className='text-sky-600 headline-m'>Card Number</label> <br />
+                                                                <p>{verified_user.user.data.data[0].user.telephone}</p>
+                                                            </div>
+                                                            <div className="w-10/12 xsm:w-full sm:w-11/12 mx-auto pt-center">
+                                                                <label htmlFor="cardnumber" className='text-sky-600 headline-m'>Identity ( id )</label> <br />
+                                                                <p>{verified_user.user.data.data[0].marital_status}</p>
+                                                            </div>
+                                                        </div>
+                                                        
                                                     </div>
                                                     <div className="mx-auto flex space-x-4 w-9/12 py-4">
                                                         <button type='button' onClick={handlePartOne} style={{ width: '80%' }} className="rounded shadow px-2 mx-auto py-1 bg-green-600 text-white font-medium">Previous</button>

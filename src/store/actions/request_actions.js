@@ -35,7 +35,9 @@ export const sendRequest =   createAsyncThunk('/request', async(values) => {
             check_no : values.check_no,
             nida_no :   values.nida_no,
             marital_status :  values.marital_status,
-            region :   values.region
+            region :   values.region,
+            photo_id : values.photo_id,
+            username : values.username
         })
 
         // console.log(response.data);
@@ -46,3 +48,56 @@ export const sendRequest =   createAsyncThunk('/request', async(values) => {
         return  error.message
     }
 })
+
+export const getAllRequests =  createAsyncThunk('/requests' , async() => {
+    try{
+        const response =  await REQUEST_API.get('/all_requests');
+        console.log(response.data);
+        return response.data
+    }
+    catch(error){
+        console.log(error)
+        return error.message
+    }
+})
+
+
+export const getPhotoId = createAsyncThunk('/latest', async() => {
+    try{
+        const response =  await axios.get(`${BASE_URL}/signal/read_signal?sort=-_id&limit=1`);
+
+        console.log(response.data);
+        return response.data
+    }
+    catch(error){
+        console.log(error);
+        return error.message
+    }
+})
+
+export const checkUserExistance =  createAsyncThunk('/check', async(id) => {
+    try{
+        const response =  await REQUEST_API.get(`user/${id}`);
+
+        console.log(response.data);
+        return response.data
+    }
+    catch(error){
+        console.log(error);
+        return error.message
+    }
+})
+
+export const verifyUser =  createAsyncThunk('/verify', async() =>{
+    try{
+        const response = await axios.get(`${BASE_URL}/signal/read_file?sort=-_id&limit=1`);
+
+        console.log(response.data);
+        return response.data
+    }
+    catch(error){
+        console.log(error);
+        return error.message
+    }
+})
+

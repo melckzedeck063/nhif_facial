@@ -11,7 +11,7 @@ import NavBar from '../containers/header';
 import SideNav from '../sideBar/sideNav';
 import FormTwo from './component/form_two';
 import { myProfile } from '../../store/actions/user_actions';
-import {sendRequest} from '../../store/actions/request_actions'
+import {getPhotoId, sendRequest} from '../../store/actions/request_actions'
 import moment from 'moment';
 
 const schema = Yup.object({
@@ -87,11 +87,18 @@ function NewRequest() {
     const profile  =  useSelector(state => state.users);
     // console.log(profile.user_profile);
 
+    const new_signal =  useSelector(state => state.request);
+
+    // console.log(new_signal.user);
+
+
     useEffect(() =>  {
         if(profile && profile.user_profile === null && reload  < 3){
             dispatch( myProfile() )
         }
     })
+
+
 
     const handlePartOne = () => {
         setPartOne(true);
@@ -103,6 +110,7 @@ function NewRequest() {
     const handlePartTwo = () => {
         setPartOne(false);
         setPartTwo(true);
+        dispatch( getPhotoId())
         // setPartThree(false);
         console.log('part two')
     }
@@ -119,29 +127,36 @@ function NewRequest() {
     })
 
     const onSubmit = data => {
-        // console.log(data, formData, file)
-        dispatch( sendRequest(data) )
+
+        if(new_signal && new_signal.user && new_signal.user.data && new_signal.user.data.data){
+            data.photo_id = new_signal.user.data.data[0].photo_id;
+            data.username = new_signal.user.data.data[0].username
+            // console.log(data, formData, file)
+            dispatch( sendRequest(data) )
+        }
+
+        // dispatch( getPhotoId())
 
         setTimeout(() => {
-            navigate('/dependant_form')
+            // navigate('/dependant_form')
         }, 2000);
     }
 
 
     useEffect(() => {
         if (isSubmitSuccessful) {
-            reset({
-                firstName: '',
-                // middleName: '',
-                lastName: '',
-                dob: '',
-                telephone: '',
-                email: '',
-                password: '',
-                confirmPassword : '',
-                card_type : ''
+            // reset({
+            //     firstName: '',
+            //     // middleName: '',
+            //     lastName: '',
+            //     dob: '',
+            //     telephone: '',
+            //     email: '',
+            //     password: '',
+            //     confirmPassword : '',
+            //     card_type : ''
 
-            })
+            // })
         }
     })
   return (

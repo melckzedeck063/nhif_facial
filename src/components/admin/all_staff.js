@@ -79,9 +79,9 @@ export default function AllStaffs() {
               <button onClick={() => handleEditBtn(row.original._id)} className="bg-blue-500 hover:bg-blue-700 text-white font-bold px-2 rounded mr-2">
                  <FaIcons.FaEdit className='font-2xl text-white m-1'  />
               </button>
-              <button onClick={() => handlDeleteBtn(row.original._id) } className="bg-red-500 hover:bg-red-700 text-white font-bold px-2 rounded">
+              {/* <button onClick={() => handlDeleteBtn(row.original._id) } className="bg-red-500 hover:bg-red-700 text-white font-bold px-2 rounded">
                   <MdIcons.MdDelete className='font-2xl text-white m-1'  />
-              </button>
+              </button> */}
             </>
           ),
         },
@@ -108,7 +108,7 @@ export default function AllStaffs() {
        <div className='w-full bg-white'>
           <NavBar  />
           <div className='py-2'>
-            <div className="text-2xl text-sky-600 text-center font-bold">Our Staffs</div>
+            <div className="text-2xl text-sky-600 text-center font-bold"><span className='headline-m'>Registered Users</span></div>
             {
               staffs.staffs?.data?.data ?(
               <div className="w-11/12 mx-auto">

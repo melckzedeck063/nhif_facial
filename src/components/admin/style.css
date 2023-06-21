@@ -1,9 +1,12 @@
 @import url('https://fonts.googleapis.com/css2?family=Ubuntu:wght@300&display=swap');
-html,body{
+
+html,
+body {
     font-family: 'Ubuntu', sans-serif;
 }
-.overlaying{
-    position:absolute;
+
+.overlaying {
+    position: absolute;
     width: 100%;
     height: 100%;
     z-index: 2;
@@ -14,8 +17,9 @@ html,body{
     transition: .3s ease-in-out;
     margin-top: -1px;
 }
-.overlaying:hover{
-    position:absolute;
+
+.overlaying:hover {
+    position: absolute;
     width: 100%;
     height: 100%;
     opacity: 100%;
@@ -25,54 +29,63 @@ html,body{
     margin: -0px;
     margin-top: -1px;
 }
-.m-profile{
+
+.m-profile {
     position: relative;
     width: 100%;
     height: 100%;
     object-fit: cover;
 }
-.headline-m{
+
+.headline-m {
     color: transparent;
-    background: linear-gradient(90deg, royalblue,rgb(184, 0, 159));
+    background: linear-gradient(90deg, royalblue, rgb(184, 0, 159));
     background-clip: text;
     -webkit-background-clip: text;
     text-transform: uppercase;
 }
-.border-btn{
+
+.border-btn {
     padding-top: 3px;
     border-top: 5px solid rgb(0, 126, 230);
 }
-::selection{
+
+::selection {
     color: rgb(255, 255, 255);
-    background-color: rgb(1, 132, 207);
+    background-color: rgb(0, 0, 0);
 }
-.pt-center{
+
+.pt-center {
     text-align: center;
     align-items: center;
     align-content: center;
 }
-button[type="submit"]{
+
+button[type="submit"] {
     position: relative;
     transition: 1s ease-in-out;
     overflow: hidden;
 }
-button[type="submit"]:hover::before{
+
+button[type="submit"]:hover::before {
     content: ' ';
     transition: 1s ease-in-out;
     position: absolute;
     z-index: 2;
-    background: linear-gradient(90deg,rgba(4, 80, 221, 0),rgb(4, 80, 221));
+    background: linear-gradient(90deg, rgba(4, 80, 221, 0), rgb(4, 80, 221));
     background-color: rgba(252, 228, 240, 0.733);
     width: 200px;
     padding: 20px;
     transform: rotate(-60deg);
     animation: 2.3s trans linear infinite;
 }
-@keyframes trans{
-    from{
+
+@keyframes trans {
+    from {
         left: -100%;
     }
-    to{
+
+    to {
         left: 100%;
     }
 }
