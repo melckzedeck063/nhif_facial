@@ -17,7 +17,7 @@ import Loader from './component/loader/loader';
 
 const schema = Yup.object({
     
-    surname: Yup
+    lastName: Yup
         .string()
         .required()
         .trim(),
@@ -144,7 +144,7 @@ function VerificationCard() {
                 cardnumber: '',
                 dob: '',
                 telephone: '',
-                surname: ''
+                lastName: ''
 
 
             })
@@ -179,13 +179,13 @@ function VerificationCard() {
                                                                 <div className="text-center font-bold py-3 text-sky-500 sm:text-sm border-bb mb-2 border-slate-300 xsm:text-sm text-lg"><span className='headline-m'>Card Verification</span></div>
                                                                 <div className="grid grid-cols-2 gap-1 w-full mx-auto mb-3">
                                                                     <div className="w-10/12 xsm:w-full sm:w-11/12 mx-auto">
-                                                                        <label htmlFor="Full Name" className='text-sky-600'>Full name</label> <br />
-                                                                        <input type="text" placeholder='Full Name'
-                                                                            className={`rounded-md w-11/12 border-2 focus:outline-none px-2 xl:py-2 lg:py-2 md:py-2 py-1 ${errors.fullName ? "border-red-500" : "border-sky-500"}  `}
+                                                                        <label htmlFor="lastName" className='text-sky-600'>lastName</label> <br />
+                                                                        <input type="text" placeholder='lastName'
+                                                                            className={`rounded-md w-11/12 border-2 focus:outline-none px-2 xl:py-2 lg:py-2 md:py-2 py-1 ${errors.lastName ? "border-red-500" : "border-sky-500"}  `}
                                                                             defaultValue={""}
-                                                                            {...register("fullName")}
+                                                                            {...register("lastName")}
                                                                         />
-                                                                        <span className="text-red-500 text-sm">{errors.fullName?.message}</span>
+                                                                        <span className="text-red-500 text-sm">{errors.lastName?.message}</span>
                                                                     </div>
                                                                     <div className="w-10/12 xsm:w-full sm:w-11/12 mx-auto">
                                                                         <label htmlFor="telephone" className='text-sky-600'>Phone Number</label> <br />
@@ -230,7 +230,7 @@ function VerificationCard() {
                                                                 <p>{verified_user.user.data.data[0].card_no}</p>
                                                             </div>
                                                             <div className="w-10/12 xsm:w-full sm:w-11/12 mx-auto pt-center">
-                                                                <label htmlFor="cardnumber" className='text-sky-600 headline-m'>Full Name</label> <br />
+                                                                <label htmlFor="cardnumber" className='text-sky-600 headline-m'>lastName</label> <br />
                                                                 <p>{verified_user.user.data.data[0].user.firstName + ' '+ verified_user.user.data.data[0].user.middleName+ ' '+ verified_user.user.data.data[0].user.lastName}</p>
                                                                 {}
                                                             </div>
